@@ -1,8 +1,12 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/">Inicio</router-link> |
+      <router-link to="/alcalde">Alcalde</router-link> |
+      <router-link to="/gore">GORE</router-link> |
+      <router-link to="/diputado">Diputado</router-link> |
+      <router-link to="/senador">Senador</router-link> |
+      <router-link to="/usuario">Usuario Común</router-link>
     </div>
     <router-view/>
   </div>
