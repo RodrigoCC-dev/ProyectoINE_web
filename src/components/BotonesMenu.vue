@@ -4,7 +4,7 @@
       <p class="lead">Elija perfil de usuario a utilizar:</p>
     </div>
     <div v-for="item of perfiles" :key="item.id">
-      <button  type="button" class="btn btn-outline-primary col-8">{{item.nombre}}</button>
+      <button  type="button" class="btn btn-outline-primary col-8" :href="item.direccion">{{item.nombre}}</button>
       <p></p>
     </div>
   </div>
