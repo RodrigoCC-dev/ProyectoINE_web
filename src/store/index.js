@@ -5,6 +5,13 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    perfiles: [
+      {nombre: "Alcalde"},
+      {nombre: "GORE"},
+      {nombre: "Diputado"},
+      {nombre: "Senador"},
+      {nombre: "Usuario Común"}
+    ]
   },
   mutations: {
   },
