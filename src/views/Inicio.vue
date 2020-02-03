@@ -1,8 +1,10 @@
 <template>
   <div class="inicio container">
-
-    <BotonesMenu></BotonesMenu>
-
+    <div class="row align-items-center">
+      <div class="col">
+        <BotonesMenu></BotonesMenu>
+      </div>
+    </div>
   </div>
 </template>
 
