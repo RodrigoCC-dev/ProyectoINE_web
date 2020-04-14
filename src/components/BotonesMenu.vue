@@ -6,7 +6,7 @@
     <div v-for="item of perfiles" :key="item.id">
       <b-button variant="outline-primary" class="col-6 mt-4" :href="item.direccion">{{item.nombre}}</b-button>
       <span class="col-6"></span>
-      <span class="badge badge-pill badge-info">?</span>
+      <span class="badge badge-pill badge-info mt-3">?</span>
     </div>
   </div>
 </template>
