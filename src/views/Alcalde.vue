@@ -33,7 +33,8 @@
               <p>Selección: {{comuna}}</p>
             </b-col>
             <div class="d-flex md-4">
-              <b-button class="btn btn-info" v-on:click="getPiramide">Obtener Datos</b-button>
+              <b-button class="btn btn-info" v-on:click="datosComuna">Obtener Datos</b-button>
+              <b-button class="btn btn-success" v-on:click="mostrarDatos">Ver Datos</b-button>
             </div>
           </b-row>
         </form>
@@ -122,39 +123,67 @@
       async getTipologia(){
         let datos = await axios.post('http://192.168.0.30:9898/tipologia/comuna', {Comuna: this.comuna});
         let lista = await datos.data;
-        this.tipologia = lista;
-        console.log(this.tipologia);
+        return lista;
       },
       async getArea(){
         let datos = await axios.post('http://192.168.0.30:9898/area/comuna', {Comuna: this.comuna});
         let lista = await datos.data;
-        this.area = lista;
-        console.log(this.area);
+        return lista;
       },
       async getPueblos(){
         let datos = await axios.post('http://192.168.0.30:9898/pueblos/comuna', {Comuna: this.comuna});
         let lista = await datos.data;
-        this.pueblos = lista;
-        console.log(this.pueblos);
+        return lista;
       },
       async getGrupos(){
         let datos = await axios.post('http://192.168.0.30:9898/grupos/comuna', {Comuna: this.comuna});
         let lista = await datos.data;
-        this.grupos = lista;
-        console.log(this.grupos);
+        return lista;
       },
       async getEscolaridad(){
         let datos = await axios.post('http://192.168.0.30:9898/escolaridad/comuna', {Comuna: this.comuna});
         let lista = await datos.data;
-        this.escolaridad = lista;
-        console.log(this.escolaridad);
+        return lista;
       },
       async getPiramide(){
         let datos = await axios.post('http://192.168.0.30:9898/piramide/comuna', {Comuna: this.comuna});
         let lista = await datos.data;
+        return lista;
+      },
+      async datosComuna(){
+        let datos = await axios.post('http://192.168.0.30:9898/tipologia/comuna', {Comuna: this.comuna});
+        let lista = await datos.data;
+        this.tipologia = lista;
+        console.log(this.tipologia);
+        datos = await axios.post('http://192.168.0.30:9898/area/comuna', {Comuna: this.comuna});
+        lista = await datos.data;
+        this.area = lista;
+        console.log(this.area);
+        datos = await axios.post('http://192.168.0.30:9898/pueblos/comuna', {Comuna: this.comuna});
+        lista = await datos.data;
+        this.pueblos = lista;
+        console.log(this.pueblos);
+        datos = await axios.post('http://192.168.0.30:9898/grupos/comuna', {Comuna: this.comuna});
+        lista = await datos.data;
+        this.grupos = lista;
+        console.log(this.grupos);
+        datos = await axios.post('http://192.168.0.30:9898/escolaridad/comuna', {Comuna: this.comuna});
+        lista = await datos.data;
+        this.escolaridad = lista;
+        console.log(this.escolaridad);
+        datos = await axios.post('http://192.168.0.30:9898/piramide/comuna', {Comuna: this.comuna});
+        lista = await datos.data;
         this.piramide = lista;
         console.log(this.piramide);
       },
+      mostrarDatos(){
+        console.log('Tipología: ', this.tipologia);
+        console.log('Área: ',this.area);
+        console.log('Pueblos: ',this.pueblos);
+        console.log('Grupos: ',this.grupos);
+        console.log('Escolaridad: ',this.escolaridad);
+        console.log('Pirámide: ',this.piramide);
+      }
   /*    async getDatos(variable, param){
         let datos = await axios.post(`http://192.168.0.30:9898/{$param}/comuna`, {Comuna: this.comuna});
         let lista = await datos.data;
@@ -162,10 +191,7 @@
         variable = lista;
         console.log(variable);
       },
-      datosComuna(){
-        this.tipologia = getTipologia();
-        this.
-      } */
+       */
     },
     mounted(){
       //store.dispatch('getRegiones'),
