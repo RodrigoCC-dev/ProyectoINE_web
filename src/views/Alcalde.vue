@@ -33,7 +33,7 @@
               <p>Selección: {{comuna}}</p>
             </b-col>
             <div class="d-flex md-4">
-              <b-button class="btn btn-info" v-on:click="getTipologia">Obtener Datos</b-button>
+              <b-button class="btn btn-info" v-on:click="getPiramide">Obtener Datos</b-button>
             </div>
           </b-row>
         </form>
@@ -63,7 +63,13 @@
         region: null,
         provincia: null,
         comuna: null,
-        tipologia: []
+        tipologia: null,
+        area: null,
+        pueblos: null,
+        grupos: null,
+        paises: null,
+        escolaridad: null,
+        piramide: null
       }
     },
     computed:{
@@ -116,9 +122,50 @@
       async getTipologia(){
         let datos = await axios.post('http://192.168.0.30:9898/tipologia/comuna', {Comuna: this.comuna});
         let lista = await datos.data;
-        console.log(lista);
         this.tipologia = lista;
-      }
+        console.log(this.tipologia);
+      },
+      async getArea(){
+        let datos = await axios.post('http://192.168.0.30:9898/area/comuna', {Comuna: this.comuna});
+        let lista = await datos.data;
+        this.area = lista;
+        console.log(this.area);
+      },
+      async getPueblos(){
+        let datos = await axios.post('http://192.168.0.30:9898/pueblos/comuna', {Comuna: this.comuna});
+        let lista = await datos.data;
+        this.pueblos = lista;
+        console.log(this.pueblos);
+      },
+      async getGrupos(){
+        let datos = await axios.post('http://192.168.0.30:9898/grupos/comuna', {Comuna: this.comuna});
+        let lista = await datos.data;
+        this.grupos = lista;
+        console.log(this.grupos);
+      },
+      async getEscolaridad(){
+        let datos = await axios.post('http://192.168.0.30:9898/escolaridad/comuna', {Comuna: this.comuna});
+        let lista = await datos.data;
+        this.escolaridad = lista;
+        console.log(this.escolaridad);
+      },
+      async getPiramide(){
+        let datos = await axios.post('http://192.168.0.30:9898/piramide/comuna', {Comuna: this.comuna});
+        let lista = await datos.data;
+        this.piramide = lista;
+        console.log(this.piramide);
+      },
+  /*    async getDatos(variable, param){
+        let datos = await axios.post(`http://192.168.0.30:9898/{$param}/comuna`, {Comuna: this.comuna});
+        let lista = await datos.data;
+        console.log(lista);
+        variable = lista;
+        console.log(variable);
+      },
+      datosComuna(){
+        this.tipologia = getTipologia();
+        this.
+      } */
     },
     mounted(){
       //store.dispatch('getRegiones'),
