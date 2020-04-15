@@ -12,7 +12,7 @@
             <b-col md="4">
               <b-form-select v-model="region">
                 <b-form-select-option :value="null">Seleccione Región</b-form-select-option>
-                <b-form-select-option v-for="(item, index) of regiones" :key="item.id" :value="index" :select="getProvincias">{{item.numero}} - {{item.nombre}}</b-form-select-option>
+                <b-form-select-option v-for="(item, index) of listaReg" :key="item.id" :value="index" :select="getProvincias">{{item.numero}} - {{item.nombre}}</b-form-select-option>
               </b-form-select>
               <p>Selección: {{region}}</p>
             </b-col>
@@ -20,7 +20,7 @@
             <b-col md="4">
               <b-form-select v-model="provincia">
                 <b-form-select-option :value="null">Seleccione Provincia</b-form-select-option>
-                <b-form-select-option v-for="(item, index) of provincias" :key="item.id" :value="index" :select="getComunas">{{item.numero}} - {{item.nombre}}</b-form-select-option>
+                <b-form-select-option v-for="(item, index) of listaProv" :key="item.id" :value="index" :select="getComunas">{{item.numero}} - {{item.nombre}}</b-form-select-option>
               </b-form-select>
               <p>Selección: {{provincia}}</p>
             </b-col>
@@ -28,11 +28,13 @@
             <b-col md="4">
               <b-form-select v-model="comuna">
                 <b-form-select-option :value="null">Seleccione Comuna</b-form-select-option>
-                <b-form-select-option v-for="(item, index) of comunas" :key="item.id" :value="item.nombre">{{item.numero}} - {{item.nombre}}</b-form-select-option>
+                <b-form-select-option v-for="(item, index) of listaCom" :key="item.id" :value="item.nombre">{{item.numero}} - {{item.nombre}}</b-form-select-option>
               </b-form-select>
               <p>Selección: {{comuna}}</p>
             </b-col>
-
+            <div class="d-flex md-4">
+              <b-button class="btn btn-info" v-on:click="getTipologia">Obtener Datos</b-button>
+            </div>
           </b-row>
         </form>
       </div>
@@ -55,60 +57,52 @@
     },
     data(){
       return{
-        select: null,
-        regionesES: [
-          {value: null, text: 'Seleccione una Región'},
-          {value: 'TARAPACÁ', text: 'Tarapacá'},
-          {value: 'ATACAMA', text: 'Atacama'},
-          {value: 'COQUIMBO', text: 'Coquimbo'},
-          {value: 'VALPARAÍSO', text: 'Valparaíso'},
-          {value: "LIBERTADOR BERNARDO O'HIGGINS", text: "Libertador Bernardo O'higgins"}
-        ],
-        regiones: [],
-        provincias: [],
-        comunas: [],
+        listaReg: [],
+        listaProv: [],
+        listaCom: [],
         region: null,
         provincia: null,
-        comuna: null
+        comuna: null,
+        tipologia: []
       }
     },
     computed:{
       getProvincias: function (){
         let lista;
         this.provincia = null;
-        if(this.regiones.empty){
+        if(this.listaReg.empty){
           lista = [];
         }else{
           if(this.region !== null){
-            lista = this.regiones[this.region].listaProvincias;
+            lista = this.listaReg[this.region].listaProvincias;
           }
           else{
             lista = [];
           }
         }
-        this.provincias = lista;
-        console.log(this.provincias);
-        return this.provincias
+        this.listaProv = lista;
+        console.log(this.region, this.listaProv);
+        return this.listaProv
       },
       getComunas: function (){
         let lista;
         this.comuna = null;
-        if(this.regiones.empty){
+        if(this.listaReg.empty){
           lista = [];
         }else{
-          if(this.provincias.empy){
+          if(this.listaProv.empy){
             lista = [];
           }else{
             if(this.provincia !== null){
-              lista = this.regiones[this.region].listaProvincias[this.provincia].listaComunas;
+              lista = this.listaReg[this.region].listaProvincias[this.provincia].listaComunas;
             }else{
               lista = [];
             }
           }
         }
-        this.comunas = lista;
-        console.log(this.comunas);
-        return this.comunas;
+        this.listaCom = lista;
+        console.log(this.provincia, this.listaCom);
+        return this.listaCom;
       }
       //...mapState(['regiones'])
     },
@@ -117,21 +111,19 @@
         let datos = await axios.get('http://192.168.0.30:9898/listar/regiones')
         let lista = await datos.data
         console.log(lista);
-        this.regiones = lista
+        this.listaReg = lista
+      },
+      async getTipologia(){
+        let datos = await axios.post('http://192.168.0.30:9898/tipologia/comuna', {Comuna: this.comuna});
+        let lista = await datos.data;
+        console.log(lista);
+        this.tipologia = lista;
       }
-      //...mapActions(['getRegiones'])
     },
     mounted(){
       //store.dispatch('getRegiones'),
       this.getRegiones()
       //console.log(regiones)
     }
-    //computed: {
-    //  ...mapState(['regiones'])
-    //},
-    //action(){
-    //  ...mapMutations(['getRegiones'])
-    //}
-
   }
 </script>
