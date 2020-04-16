@@ -8,16 +8,20 @@
 
 <script>
   export default{
-    name: 'SelectorRegion',
-    select: null,
-    regiones: [
-      {value: null, text: 'Seleccione una Región'},
-      {value: 'TARAPACÁ', text: 'Tarapacá'},
-      {value: 'ATACAMA', text: 'Atacama'},
-      {value: 'COQUIMBO', text: 'Coquimbo'},
-      {value: 'VALPARAÍSO', text: 'Valparaíso'},
-      {value: "LIBERTADOR BERNARDO O'HIGGINS", text: "Libertador Bernardo O'higgins"}
-    ],
+    name: 'SelectorRegion'
+  },
+  data(){
+    return{
+      select: null,
+      regiones: [
+        {value: null, text: 'Seleccione una Región'},
+        {value: 'TARAPACÁ', text: 'Tarapacá'},
+        {value: 'ATACAMA', text: 'Atacama'},
+        {value: 'COQUIMBO', text: 'Coquimbo'},
+        {value: 'VALPARAÍSO', text: 'Valparaíso'},
+        {value: "LIBERTADOR BERNARDO O'HIGGINS", text: "Libertador Bernardo O'higgins"}
+      ]
+    }
   }
 
 </script>
