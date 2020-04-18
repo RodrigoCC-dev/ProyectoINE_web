@@ -115,7 +115,7 @@
     },
     methods:{
       async getRegiones(){
-        let datos = await axios.get('http://192.168.0.30:9898/listar/regiones')
+        let datos = await axios.get('http://192.168.0.46:9898/listar/regiones')
         let lista = await datos.data
         console.log(lista);
         this.listaReg = lista
@@ -151,27 +151,27 @@
         return lista;
       },
       async datosComuna(){
-        let datos = await axios.post('http://192.168.0.30:9898/tipologia/comuna', {Comuna: this.comuna});
+        let datos = await axios.post('http://192.168.0.46:9898/tipologia/comuna', {Comuna: this.comuna});
         let lista = await datos.data;
         this.tipologia = lista;
         console.log(this.tipologia);
-        datos = await axios.post('http://192.168.0.30:9898/area/comuna', {Comuna: this.comuna});
+        datos = await axios.post('http://192.168.0.46:9898/area/comuna', {Comuna: this.comuna});
         lista = await datos.data;
         this.area = lista;
         console.log(this.area);
-        datos = await axios.post('http://192.168.0.30:9898/pueblos/comuna', {Comuna: this.comuna});
+        datos = await axios.post('http://192.168.0.46:9898/pueblos/comuna', {Comuna: this.comuna});
         lista = await datos.data;
         this.pueblos = lista;
         console.log(this.pueblos);
-        datos = await axios.post('http://192.168.0.30:9898/grupos/comuna', {Comuna: this.comuna});
+        datos = await axios.post('http://192.168.0.46:9898/grupos/comuna', {Comuna: this.comuna});
         lista = await datos.data;
         this.grupos = lista;
         console.log(this.grupos);
-        datos = await axios.post('http://192.168.0.30:9898/escolaridad/comuna', {Comuna: this.comuna});
+        datos = await axios.post('http://192.168.0.46:9898/escolaridad/comuna', {Comuna: this.comuna});
         lista = await datos.data;
         this.escolaridad = lista;
         console.log(this.escolaridad);
-        datos = await axios.post('http://192.168.0.30:9898/piramide/comuna', {Comuna: this.comuna});
+        datos = await axios.post('http://192.168.0.46:9898/piramide/comuna', {Comuna: this.comuna});
         lista = await datos.data;
         this.piramide = lista;
         console.log(this.piramide);

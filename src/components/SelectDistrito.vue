@@ -1,16 +1,17 @@
 <template>
 
   <div>
-    <b-form-select v-model="distrito">
+    <b-form-select v-model="eleccion">
       <b-form-select-option :value='null'>Seleccione un Distrito</b-form-select-option>
-      <b-form-select-option v-for="(item, index) of distritos" :key="item.id" :value="index" :select="getComunas">Número Distrito: {{item.numero}}</b-form-select-option>
+      <b-form-select-option v-for="(item, index) of listaEntrada" :key="item.id" :value="index" :select="getComunasDistrito">Número Distrito: {{item.numero}}</b-form-select-option>
     </b-form-select>
-    <p>Selección: {{distrito}}</p>
+    <p>Selección: {{eleccion}}</p>
   </div>
 
 </template>
 
 <script>
+  import store from 'vuex'
   import {mapState, mapMutations} from 'vuex'
 
   export default{
@@ -18,15 +19,20 @@
     props: ['listaEntrada'],
     data(){
       return{
-        distritos: this.listaEntrada
+        eleccion: null
       }
     },
     computed: {
-      ...mapState(['distrito'])
+      ...mapState(['distrito']),
+
+      actualizarDistrito: function(){
+        store.state.distrito = this.eleccion
+        return console.log(store.state.distrito)
+      }
 
     },
     methods: {
-      ...mapMutations(['getComunas'])
+      ...mapMutations(['getComunasDistrito'])
     },
     mounted(){
       console.log('Props:', this.listaEntrada)
