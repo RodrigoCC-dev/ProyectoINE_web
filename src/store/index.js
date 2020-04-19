@@ -18,8 +18,12 @@ export default new Vuex.Store({
     listaCom: [],
     listaDist: [],
     listaCirc: [],
+    region: null,
+    provincia: null,
+    comuna: null,
+    localidad: null,
     distrito: null,
-    comuna: null
+    circunscripcion: null
   },
   mutations: {
     /*/async getRegiones(){
@@ -30,9 +34,14 @@ export default new Vuex.Store({
     listarRegiones(state, lista){
       state.regiones = lista
     }, */
+
+    // Método para actualizar listado de distritos
     obtenerDistritos(state, distritos){
       state.listaDist = distritos
       console.log('State_listaDist', state.listaDist)
+    },
+    obtenerCircunscripciones(state, circunscripciones){
+      state.listaCirc = circunscripciones
     },
     getComunasDistrito(state, numero){
       let lista;
@@ -47,11 +56,15 @@ export default new Vuex.Store({
         }
       }
       state.listaCom = lista;
-      //console.log(numero, state.listaCom);
-      //return state.listaCom;
+    },
+    getComunasCircunscripcion(state, numero){
+      state.listaCom = state.listaCirc[numero].listaComunas
     },
     seleccionDistrito(state, id){
       state.distrito = id
+    },
+    seleccionCircunscripcion(state, id){
+      state.circunscripcion = id
     },
     seleccionComuna(state, nombre){
       state.comuna = nombre
@@ -67,6 +80,11 @@ export default new Vuex.Store({
       let datos = await axios.get('http://192.168.0.46:9898/listar/distritos')
       let lista = datos.data
       commit('obtenerDistritos', lista)
+    },
+    getCircunscripciones: async function({commit}){
+      let datos = await axios.get('http://192.168.0.46:9898/listar/distritos')
+      let lista = datos.data
+      commit('obtenerCircunscripciones', lista)
     }
   },
   modules: {
