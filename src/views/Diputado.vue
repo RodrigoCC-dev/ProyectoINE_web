@@ -9,14 +9,14 @@
         <form>
           <b-row>
             <b-col md="6">
-              <b-form-select v-model="idDistrito">
+              <b-form-select v-model="actualizarDistrito">
                 <b-form-select-option :value='null'>Seleccione un Distrito</b-form-select-option>
                 <b-form-select-option v-for="(item, index) of listaDist" :key="item.id" :value="index">Número Distrito: {{item.numero}}</b-form-select-option>
               </b-form-select>
-              <p>Selección: {{idDistrito}}</p>
+              <p>Selección: {{actualizarDistrito}}</p>
             </b-col>
             <b-col md="6">
-              <SelectComuna :comunas="listadoComunas"></SelectComuna>
+              <SelectComuna></SelectComuna>
             </b-col>
             <div>
               <b-button class="btn btn-success" v-on:click="disteClick">Obtener Datos</b-button>
@@ -44,35 +44,29 @@
       SelectComuna
     },
     data(){
-      return{
-        idDistrito: null,
-        listadoComunas: []
-      }
+      return{}
     },
     computed:{
-      ...mapState(['distrito', 'listaDist']),
+      ...mapState(['listaDist']),
 
       actualizarDistrito: {
         get: function(){
           return this.$store.state.distrito
         },
         set: function(idDistrito){
-          return this.$store.commit('seleccionDistrito', idDistrito);
-        }
-      },
-      listarComunas: function(){
-        if(this.idDistrito !== null){
-          return this.listadoComunas = this.listaDist[this.idDistrito].listaComunas
-        }else{
-          return this.listadoComunas = []
+          this.$store.commit('seleccionDistrito', idDistrito);
+          return this.listarComunas();
         }
       }
-
     },
     methods:{
       ...mapActions(['getDistritos']),
+
       disteClick(){
         console.log("Obtener Datos API")
+      },
+      listarComunas: function(){
+        return this.$store.commit('getComunasDistrito', this.actualizarDistrito);
       }
     },
     mounted(){
