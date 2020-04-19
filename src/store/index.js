@@ -13,6 +13,8 @@ export default new Vuex.Store({
       {nombre: "Senador", direccion: "/senador"},
       {nombre: "Usuario Común", direccion: "/usuario"}
     ],
+
+    //Selectores de información
     listaReg: [],
     listaProv: [],
     listaCom: [],
@@ -23,17 +25,27 @@ export default new Vuex.Store({
     comuna: null,
     localidad: null,
     distrito: null,
-    circunscripcion: null
+    circunscripcion: null,
+
+    //Datos desde API
+    tipologia: null,
+    area: null,
+    pueblos: null,
+    grupos: null,
+    paises: null,
+    escolaridad: null,
+    piramide: null
   },
   mutations: {
     /*/async getRegiones(){
     //  let datos = await axios.get('http://192.168.0.30:9898/listar/regiones')
     //  console.log(datos.data);
     //  this.regiones = await datos.data
-    //},
+    //},*/
+
     listarRegiones(state, lista){
       state.regiones = lista
-    }, */
+    },
 
     // Método para actualizar listado de distritos
     obtenerDistritos(state, distritos){
@@ -68,6 +80,12 @@ export default new Vuex.Store({
     },
     seleccionComuna(state, nombre){
       state.comuna = nombre
+    },
+    seleccionProvincia(state, id){
+      state.provincia = id
+    },
+    seleccionRegion(state, id){
+      state.region = id
     }
   },
   actions: {
