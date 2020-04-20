@@ -51,7 +51,7 @@
 
       actualizarDistrito: {
         get: function(){
-          return this.$store.state.distrito
+          return this.$store.state.distrito;
         },
         set: function(idDistrito){
           this.$store.commit('seleccionDistrito', idDistrito);

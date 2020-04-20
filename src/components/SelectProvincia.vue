@@ -14,7 +14,7 @@
   import {mapState} from 'vuex'
 
   export default{
-    name: 'SelectProvincia'
+    name: 'SelectProvincia',
     data(){
       return{}
     },
@@ -23,13 +23,18 @@
 
       actualizarProvincia: {
         get: function (){
-          return this.$store.state.provincia
+          return this.$store.state.provincia;
         },
         set: function (value){
-          return this.$store.commit('seleccionProvincia', value)
+          this.$store.commit('seleccionProvincia', value);
+          return this.listarComunas();
         }
       }
-
+    },
+    methods: {
+      listarComunas: function (){
+        return this.$store.commit('getComunasProvincia', this.actualizarProvincia);
+      }
     }
   }
 

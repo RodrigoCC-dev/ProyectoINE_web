@@ -44,7 +44,7 @@ export default new Vuex.Store({
     //},*/
 
     listarRegiones(state, lista){
-      state.regiones = lista
+      state.listaReg = lista
     },
 
     // Método para actualizar listado de distritos
@@ -71,6 +71,12 @@ export default new Vuex.Store({
     },
     getComunasCircunscripcion(state, numero){
       state.listaCom = state.listaCirc[numero].listaComunas
+    },
+    getProvinciasRegion(state, numero){
+      state.listaProv = state.listaReg[numero].listaProvincias
+    },
+    getComunasProvincia(state, numero){
+      state.listaCom = state.listaProv[numero].listaComunas
     },
     seleccionDistrito(state, id){
       state.distrito = id

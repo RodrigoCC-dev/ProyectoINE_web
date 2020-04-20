@@ -11,10 +11,10 @@
 </template>
 
 <script>
-  import {mapState} from 'vuex'
+  import {mapState, mapActions} from 'vuex'
 
   export default{
-    name: 'SelectRegion'
+    name: 'SelectRegion',
     data(){
       return{}
     },
@@ -23,15 +23,20 @@
 
       actualizarRegion: {
         get: function (){
-          return this.$store.state.region
+          return this.$store.state.region;
         },
         set: function (value){
-          return this.$store.commit('seleccionRegion', value)
+          this.$store.commit('seleccionRegion', value);
+          return this.listarProvincias();
         }
       }
     },
     methods: {
-      ...mapActions(['getRegiones'])
+      ...mapActions(['getRegiones']),
+
+      listarProvincias: function (){
+        return this.$store.commit('getProvinciasRegion', this.actualizarRegion);
+      }
     },
     mounted(){
       this.getRegiones()
