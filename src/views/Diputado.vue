@@ -32,7 +32,6 @@
 
 <script>
 
-  import NavBar from '@/components/Navbar.vue'
   import Bnavbar from '@/components/Bnavbar.vue'
   import SelectComuna from '@/components/SelectComuna.vue'
 
@@ -41,7 +40,6 @@
   export default {
     name: 'Diputado',
     components: {
-      NavBar,
       Bnavbar,
       SelectComuna
     },
@@ -78,7 +76,7 @@
     },
     mounted(){
       this.getDistritos();
-      this.$store.commit('sleccionDistrito', null);
+      this.$store.commit('seleccionDistrito', null);
     }
   }
 

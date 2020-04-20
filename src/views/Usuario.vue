@@ -40,7 +40,6 @@
 
 <script>
 
-  import NavBar from '@/components/Navbar.vue'
   import Bnavbar from '@/components/Bnavbar.vue'
   import SelectRegion from '@/components/SelectRegion.vue'
   import SelectProvincia from '@/components/SelectProvincia.vue'
@@ -51,7 +50,6 @@
   export default{
     name: 'Usuario',
     components: {
-      NavBar,
       Bnavbar,
       SelectRegion,
       SelectProvincia,

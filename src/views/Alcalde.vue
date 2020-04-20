@@ -65,9 +65,6 @@
           this.datosRegion();
         }
       }
-    },
-    mounted(){
-      this.getRegiones();
     }
   }
 </script>

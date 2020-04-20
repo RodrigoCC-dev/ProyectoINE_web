@@ -29,7 +29,6 @@
 
 <script>
 
-  import NavBar from '@/components/Navbar.vue'
   import Bnavbar from '@/components/Bnavbar.vue'
   import SelectRegion from '@/components/SelectRegion'
   import SelectProvincia from '@/components/SelectProvincia'
@@ -40,7 +39,6 @@
   export default{
     name: 'Gore',
     components: {
-      NavBar,
       Bnavbar,
       SelectRegion,
       SelectProvincia,

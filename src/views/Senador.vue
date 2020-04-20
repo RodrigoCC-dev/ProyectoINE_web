@@ -30,7 +30,6 @@
 
 <script>
 
-  import NavBar from '@/components/Navbar.vue'
   import Bnavbar from '@/components/Bnavbar.vue'
   import SelectComuna from '@/components/SelectComuna.vue'
 
@@ -39,7 +38,6 @@
   export default{
     name: 'Senador',
     components: {
-      NavBar,
       Bnavbar,
       SelectComuna
     },
