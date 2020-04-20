@@ -4,7 +4,7 @@
       <Bnavbar></Bnavbar>
     </div>
     <div class="usuario">
-      <h1>Esta es la página del perfil Usuario Común</h1>
+      <h1>Perfil Usuario Común</h1>
       <div class="mx-5 mt-5">
         <form>
           <b-row>
@@ -28,9 +28,9 @@
             </b-col>
           </b-row>
           <b-row>
-            <div>
-              <b-button class="btn btn-success" v-on:click="disteClick">Obtener Datos</b-button>
-            </div>
+            <b-col md="12">
+              <b-button class="btn btn-success btn-block" v-on:click="disteClick">Obtener Datos</b-button>
+            </b-col>
           </b-row>
         </form>
       </div>

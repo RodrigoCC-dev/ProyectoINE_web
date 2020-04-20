@@ -4,7 +4,7 @@
       <Bnavbar></Bnavbar>
     </div>
     <div class="diputado">
-      <h1>Esta es la página del perfil Diputado</h1>
+      <h1>Usuario perfil Diputado</h1>
       <div class="mx-5 mt-5">
         <form>
           <b-row>
@@ -20,9 +20,9 @@
             </b-col>
           </b-row>
           <b-row>
-            <div class="d-flex" md="4">
-              <b-button class="btn btn-success" v-on:click="disteClick">Obtener Datos</b-button>
-            </div>
+            <b-col md="12">
+              <b-button class="btn btn-success btn-block" v-on:click="disteClick">Obtener Datos</b-button>
+            </b-col>
           </b-row>
         </form>
       </div>

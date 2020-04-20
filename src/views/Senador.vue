@@ -4,7 +4,7 @@
       <Bnavbar></Bnavbar>
     </div>
     <div class="senador">
-      <h1>Esta es la página del perfil Senador</h1>
+      <h1>Usuario perfil Senador</h1>
       <div class="mx-5 mt-5">
         <form>
           <b-row md="6">
@@ -18,9 +18,9 @@
             <b-col md="6">
               <SelectComuna></SelectComuna>
             </b-col>
-            <div>
-              <b-button class="btn btn-success" v-on:click="disteClick">Obtener Datos</b-button>
-            </div>
+            <b-col md="12">
+              <b-button class="btn btn-success btn-block" v-on:click="disteClick">Obtener Datos</b-button>
+            </b-col>
           </b-row>
         </form>
       </div>
