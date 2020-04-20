@@ -38,6 +38,9 @@
       listarLocalidades: function (){
         return this.$store.commit('getLocalidadesComuna', this.actualizarComuna);
       }
+    },
+    mounted(){
+      this.$store.commit('seleccionComuna', null);
     }
   }
 </script>

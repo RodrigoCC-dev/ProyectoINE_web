@@ -78,6 +78,7 @@
     },
     mounted(){
       this.getCircunscripciones();
+      this.$store.commit('seleccionCircunscripcion', null);
     }
   }
 </script>

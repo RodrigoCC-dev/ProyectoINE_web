@@ -41,6 +41,9 @@
       listarComunas: function (){
         return this.$store.commit('getComunasProvincia', this.actualizarProvincia);
       }
+    },
+    mounted(){
+      this.$store.commit('seleccionProvincia', null);
     }
   }
 

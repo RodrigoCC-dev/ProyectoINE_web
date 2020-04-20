@@ -41,7 +41,8 @@
       }
     },
     mounted(){
-      this.getRegiones()
+      this.getRegiones();
+      this.$store.commit('seleccionRegion', null);
     }
   }
 

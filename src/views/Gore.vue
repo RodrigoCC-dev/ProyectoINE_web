@@ -68,9 +68,6 @@
       }
     },
     mounted(){
-      this.$store.commit('seleccionRegion', null);
-      this.$store.commit('seleccionProvincia', null);
-      this.$store.commit('seleccionComuna', null);
     }
   }
 </script>

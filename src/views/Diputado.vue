@@ -78,6 +78,7 @@
     },
     mounted(){
       this.getDistritos();
+      this.$store.commit('sleccionDistrito', null);
     }
   }
 
