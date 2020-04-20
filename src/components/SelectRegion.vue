@@ -26,6 +26,8 @@
           return this.$store.state.region;
         },
         set: function (value){
+          this.$store.commit('seleccionComuna', null)
+          this.$store.commit('seleccionProvincia', null)
           this.$store.commit('seleccionRegion', value);
           return this.listarProvincias();
         }

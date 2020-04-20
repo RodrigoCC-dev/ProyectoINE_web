@@ -18,12 +18,12 @@ export default new Vuex.Store({
     listaReg: [],
     listaProv: [],
     listaCom: [],
+    listaLoc: [],
     listaDist: [],
     listaCirc: [],
     region: null,
     provincia: null,
     comuna: null,
-    localidad: null,
     distrito: null,
     circunscripcion: null,
 
@@ -77,6 +77,15 @@ export default new Vuex.Store({
     },
     getComunasProvincia(state, numero){
       state.listaCom = state.listaProv[numero].listaComunas
+    },
+    getLocalidadesComuna(state, nombre){
+      let index = 0
+      for(let i = 0; i < state.listaCom.length; i++){
+        if(state.listaCom[i].nombre === nombre){
+          index = i
+        }
+      }
+      state.listaLoc = state.listaCom[index].localidades
     },
     seleccionDistrito(state, id){
       state.distrito = id

@@ -54,6 +54,7 @@
           return this.$store.state.distrito;
         },
         set: function(idDistrito){
+          this.$store.commit('seleccionComuna', null);
           this.$store.commit('seleccionDistrito', idDistrito);
           return this.listarComunas();
         }

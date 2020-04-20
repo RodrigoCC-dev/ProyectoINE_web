@@ -56,7 +56,8 @@
           return this.$store.state.circunscripcion
         },
         set: function (idCircuns) {
-          this.$store.commit('seleccionCircunscripcion', idCircuns)
+          this.$store.commit('seleccionComuna', null);
+          this.$store.commit('seleccionCircunscripcion', idCircuns);
           return this.listarComunas();
         }
       }

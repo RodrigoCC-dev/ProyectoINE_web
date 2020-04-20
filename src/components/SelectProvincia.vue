@@ -26,8 +26,14 @@
           return this.$store.state.provincia;
         },
         set: function (value){
-          this.$store.commit('seleccionProvincia', value);
-          return this.listarComunas();
+          if(value !== null){
+            this.$store.commit('seleccionComuna', null)
+            this.$store.commit('seleccionProvincia', value);
+            return this.listarComunas();
+          }else{
+            return this.$store.commit('seleccionProvincia', value)
+          }
+
         }
       }
     },

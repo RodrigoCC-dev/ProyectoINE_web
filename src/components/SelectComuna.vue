@@ -25,11 +25,17 @@
 
       actualizarComuna:{
         get: function(){
-          return this.$store.state.comuna
+          return this.$store.state.comuna;
         },
         set: function(value){
-          return this.$store.commit('seleccionComuna', value)
+          this.$store.commit('seleccionComuna', value);
+          return this.listarLocalidades();
         }
+      }
+    },
+    methods: {
+      listarLocalidades: function (){
+        return this.$store.commit('getLocalidadesComuna', this.actualizarComuna);
       }
     }
   }
