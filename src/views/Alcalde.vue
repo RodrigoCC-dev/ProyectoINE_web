@@ -8,34 +8,20 @@
       <div class="mx-5 mt-5">
         <form>
           <b-row>
-
             <b-col md="4">
-              <b-form-select v-model="region">
-                <b-form-select-option :value="null">Seleccione Región</b-form-select-option>
-                <b-form-select-option v-for="(item, index) of listaReg" :key="item.id" :value="index" :select="getProvincias">{{item.numero}} - {{item.nombre}}</b-form-select-option>
-              </b-form-select>
-              <p>Selección: {{region}}</p>
+              <SelectRegion></SelectRegion>
             </b-col>
-
             <b-col md="4">
-              <b-form-select v-model="provincia">
-                <b-form-select-option :value="null">Seleccione Provincia</b-form-select-option>
-                <b-form-select-option v-for="(item, index) of listaProv" :key="item.id" :value="index" :select="getComunas">{{item.numero}} - {{item.nombre}}</b-form-select-option>
-              </b-form-select>
-              <p>Selección: {{provincia}}</p>
+              <SelectProvincia></SelectProvincia>
             </b-col>
-
             <b-col md="4">
-              <b-form-select v-model="comuna">
-                <b-form-select-option :value="null">Seleccione Comuna</b-form-select-option>
-                <b-form-select-option v-for="(item, index) of listaCom" :key="item.id" :value="item.nombre">{{item.numero}} - {{item.nombre}}</b-form-select-option>
-              </b-form-select>
-              <p>Selección: {{comuna}}</p>
+              <SelectComuna></SelectComuna>
             </b-col>
-            <div class="d-flex md-4">
-              <b-button class="btn btn-info" v-on:click="datosComuna">Obtener Datos</b-button>
-              <b-button class="btn btn-success" v-on:click="mostrarDatos">Ver Datos</b-button>
-            </div>
+          </b-row>
+          <b-row>
+            <b-col class="d-box" md="12">
+              <b-button class="btn btn-success" v-on:click="disteClick">Obtener Datos</b-button>
+            </b-col>
           </b-row>
         </form>
       </div>
@@ -44,159 +30,47 @@
 </template>
 
 <script>
-  import axios from 'axios'
-  import NavBar from '@/components/Navbar.vue'
   import Bnavbar from '@/components/Bnavbar.vue'
+  import SelectRegion from '@/components/SelectRegion.vue'
+  import SelectProvincia from '@/components/SelectProvincia.vue'
+  import SelectComuna from '@/components/SelectComuna.vue'
 
   import {mapState, mapActions} from 'vuex'
 
   export default{
     name: 'Alcalde',
     components: {
-      NavBar,
-      Bnavbar
+      Bnavbar,
+      SelectRegion,
+      SelectProvincia,
+      SelectComuna
     },
     data(){
       return{
-        listaReg: [],
-        listaProv: [],
-        listaCom: [],
-        region: null,
-        provincia: null,
-        comuna: null,
-        tipologia: null,
-        area: null,
-        pueblos: null,
-        grupos: null,
-        paises: null,
-        escolaridad: null,
-        piramide: null
       }
     },
     computed:{
-      getProvincias: function (){
-        let lista;
-        this.provincia = null;
-        if(this.listaReg.empty){
-          lista = [];
-        }else{
-          if(this.region !== null){
-            lista = this.listaReg[this.region].listaProvincias;
-          }
-          else{
-            lista = [];
-          }
-        }
-        this.listaProv = lista;
-        console.log(this.region, this.listaProv);
-        return this.listaProv
-      },
-      getComunas: function (){
-        let lista;
-        this.comuna = null;
-        if(this.listaReg.empty){
-          lista = [];
-        }else{
-          if(this.listaProv.empy){
-            lista = [];
-          }else{
-            if(this.provincia !== null){
-              lista = this.listaReg[this.region].listaProvincias[this.provincia].listaComunas;
-            }else{
-              lista = [];
-            }
-          }
-        }
-        this.listaCom = lista;
-        console.log(this.provincia, this.listaCom);
-        return this.listaCom;
-      }
-      //...mapState(['regiones'])
+      ...mapState(['region', 'provincia', 'comuna', 'tipologia', 'area', 'pueblos', 'grupos', 'paises', 'escolaridad', 'piramide'])
+
     },
     methods:{
-      async getRegiones(){
-        let datos = await axios.get('http://192.168.0.46:9898/listar/regiones')
-        let lista = await datos.data
-        console.log(lista);
-        this.listaReg = lista
-      },
-      async getTipologia(){
-        let datos = await axios.post('http://192.168.0.30:9898/tipologia/comuna', {Comuna: this.comuna});
-        let lista = await datos.data;
-        return lista;
-      },
-      async getArea(){
-        let datos = await axios.post('http://192.168.0.30:9898/area/comuna', {Comuna: this.comuna});
-        let lista = await datos.data;
-        return lista;
-      },
-      async getPueblos(){
-        let datos = await axios.post('http://192.168.0.30:9898/pueblos/comuna', {Comuna: this.comuna});
-        let lista = await datos.data;
-        return lista;
-      },
-      async getGrupos(){
-        let datos = await axios.post('http://192.168.0.30:9898/grupos/comuna', {Comuna: this.comuna});
-        let lista = await datos.data;
-        return lista;
-      },
-      async getEscolaridad(){
-        let datos = await axios.post('http://192.168.0.30:9898/escolaridad/comuna', {Comuna: this.comuna});
-        let lista = await datos.data;
-        return lista;
-      },
-      async getPiramide(){
-        let datos = await axios.post('http://192.168.0.30:9898/piramide/comuna', {Comuna: this.comuna});
-        let lista = await datos.data;
-        return lista;
-      },
-      async datosComuna(){
-        let datos = await axios.post('http://192.168.0.46:9898/tipologia/comuna', {Comuna: this.comuna});
-        let lista = await datos.data;
-        this.tipologia = lista;
-        console.log(this.tipologia);
-        datos = await axios.post('http://192.168.0.46:9898/area/comuna', {Comuna: this.comuna});
-        lista = await datos.data;
-        this.area = lista;
-        console.log(this.area);
-        datos = await axios.post('http://192.168.0.46:9898/pueblos/comuna', {Comuna: this.comuna});
-        lista = await datos.data;
-        this.pueblos = lista;
-        console.log(this.pueblos);
-        datos = await axios.post('http://192.168.0.46:9898/grupos/comuna', {Comuna: this.comuna});
-        lista = await datos.data;
-        this.grupos = lista;
-        console.log(this.grupos);
-        datos = await axios.post('http://192.168.0.46:9898/escolaridad/comuna', {Comuna: this.comuna});
-        lista = await datos.data;
-        this.escolaridad = lista;
-        console.log(this.escolaridad);
-        datos = await axios.post('http://192.168.0.46:9898/piramide/comuna', {Comuna: this.comuna});
-        lista = await datos.data;
-        this.piramide = lista;
-        console.log(this.piramide);
-      },
-      mostrarDatos(){
-        console.log('Tipología: ', this.tipologia);
-        console.log('Área: ',this.area);
-        console.log('Pueblos: ',this.pueblos);
-        console.log('Grupos: ',this.grupos);
-        console.log('Escolaridad: ',this.escolaridad);
-        console.log('Pirámide: ',this.piramide);
+      ...mapActions(['datosRegion', 'datosProvincia', 'datosComuna']),
+
+      disteClick(){
+        if(this.comuna !== null){
+          this.datosComuna();
+        }else if(this.provincia !== null){
+          this.datosProvincia();
+        }else{
+          this.datosRegion();
+        }
       }
-  /*    async getDatos(variable, param){
-        let datos = await axios.post(`http://192.168.0.30:9898/{$param}/comuna`, {Comuna: this.comuna});
-        let lista = await datos.data;
-        console.log(lista);
-        variable = lista;
-        console.log(variable);
-      },
-       */
     },
     mounted(){
-      //store.dispatch('getRegiones'),
-      this.getRegiones()
-      //console.log(regiones)
+      this.getRegiones();
+      this.$store.commit('seleccionComuna', null);
+      this.$store.commit('seleccionProvincia', null);
+      this.$store.commit('seleccionRegion', null);
     }
   }
 </script>
