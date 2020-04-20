@@ -35,6 +35,8 @@
   import SelectProvincia from '@/components/SelectProvincia'
   import SelectComuna from '@/components/SelectComuna'
 
+  import {mapState, mapActions} from 'vuex'
+
   export default{
     name: 'Gore',
     components: {
@@ -49,10 +51,26 @@
 
       }
     },
+    computed: {
+      ...mapState(['region', 'provincia', 'comuna', 'tipologia', 'area', 'pueblos', 'grupos', 'paises', 'escolaridad', 'piramide'])
+    },
     methods: {
+      ...mapActions(['datosRegion', 'datosProvincia', 'datosComuna']),
+
       disteClick(){
-        console.log("Obtener Datos API")
+        if(this.comuna !== null){
+          this.datosComuna();
+        }else if(this.provincia !== null){
+          this.datosProvincia();
+        }else{
+          this.datosRegion();
+        }
       }
+    },
+    mounted(){
+      this.$store.commit('seleccionRegion', null);
+      this.$store.commit('seleccionProvincia', null);
+      this.$store.commit('seleccionComuna', null);
     }
   }
 </script>

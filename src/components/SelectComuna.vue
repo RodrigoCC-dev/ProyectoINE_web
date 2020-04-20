@@ -28,6 +28,7 @@
           return this.$store.state.comuna;
         },
         set: function(value){
+          this.$store.commit('seleccionLocalidad', null);
           this.$store.commit('seleccionComuna', value);
           return this.listarLocalidades();
         }

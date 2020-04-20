@@ -20,11 +20,17 @@
               <SelectComuna></SelectComuna>
             </b-col>
             <b-col md="6">
-              <b-form-select v-model="localidad">
+              <b-form-select v-model="actualizarLocalidad">
                 <b-form-select-option :value="null">Seleccionar Localidad</b-form-select-option>
                 <b-form-select-option v-for="(item, index) of listaLoc" :key="item.id" :value="item">{{item}}</b-form-select-option>
               </b-form-select>
+              <p>Selección: {{actualizarLocalidad}}</p>
             </b-col>
+          </b-row>
+          <b-row>
+            <div>
+              <b-button class="btn btn-success" v-on:click="disteClick">Obtener Datos</b-button>
+            </div>
           </b-row>
         </form>
       </div>
@@ -40,7 +46,7 @@
   import SelectProvincia from '@/components/SelectProvincia.vue'
   import SelectComuna from '@/components/SelectComuna.vue'
 
-  import {mapState} from 'vuex'
+  import {mapState, mapActions} from 'vuex'
 
   export default{
     name: 'Usuario',
@@ -53,19 +59,41 @@
     },
     data(){
       return{
-        localidad: null
+
       }
     },
     computed: {
-      ...mapState(['listaLoc'])
+      ...mapState(['listaLoc', 'region', 'provincia', 'comuna', 'localidad', 'tipologia', 'area', 'pueblos', 'grupos', 'paises', 'escolaridad', 'piramide']),
 
-
+      actualizarLocalidad: {
+        get: function (){
+          return this.$store.state.localidad;
+        },
+        set: function (nombre){
+          return this.$store.commit('seleccionLocalidad', nombre);
+        }
+      }
     },
     methods: {
+      ...mapActions(['datosRegion', 'datosProvincia', 'datosComuna', 'datosLocalidad']),
 
+      disteClick(){
+        if(this.localidad !== null){
+          this.datosLocalidad();
+        }else if(this.comuna !== null){
+          this.datosComuna();
+        }else if(this.provincia !== null){
+          this.datosProvincia();
+        }else{
+          this.datosRegion();
+        }
+      }
     },
     mounted(){
-
+      this.$store.commit('seleccionRegion', null);
+      this.$store.commit('seleccionProvincia', null);
+      this.$store.commit('seleccionComuna', null);
+      this.$store.commit('seleccionLocalidad', null);
     }
   }
 

@@ -24,6 +24,7 @@ export default new Vuex.Store({
     region: null,
     provincia: null,
     comuna: null,
+    localidad: null,
     distrito: null,
     circunscripcion: null,
 
@@ -85,6 +86,9 @@ export default new Vuex.Store({
     },
     seleccionRegion(state, id){
       state.region = id
+    },
+    seleccionLocalidad(state, nombre){
+      state.localidad = nombre
     },
 
     // Métodos para guardar datos desde la API
@@ -207,6 +211,81 @@ export default new Vuex.Store({
       lista = await datos.data;
       commit('guardarEscolaridad', lista);
       datos = await axios.post('http://192.168.0.46:9898/piramide/circunscripcion', params);
+      lista = await datos.data;
+      commit('guardarPiramide', lista);
+    },
+    datosRegion: async function({commit}){
+      commit('resetearDatos');
+      let params = {Region: this.state.listaReg[this.state.region].nombre}
+      let datos = await axios.post('http://192.168.0.46:9898/tipologia/region', params);
+      let lista = await datos.data;
+      commit('guardarTipologia', lista);
+      datos = await axios.post('http://192.168.0.46:9898/area/region', params);
+      lista = await datos.data;
+      commit('guardarArea', lista);
+      datos = await axios.post('http://192.168.0.46:9898/pueblos/region', params);
+      lista = await datos.data;
+      commit('guardarPueblos', lista);
+      datos = await axios.post('http://192.168.0.46:9898/grupos/region', params);
+      lista = await datos.data;
+      commit('guardarGrupos', lista);
+      datos = await axios.post('http://192.168.0.46:9898/paises/region', params);
+      lista = await datos.data;
+      commit('guardarPaises', lista);
+      datos = await axios.post('http://192.168.0.46:9898/escolaridad/region', params);
+      lista = await datos.data;
+      commit('guardarEscolaridad', lista);
+      datos = await axios.post('http://192.168.0.46:9898/piramide/region', params);
+      lista = await datos.data;
+      commit('guardarPiramide', lista);
+    },
+    datosProvincia: async function({commit}){
+      commit('resetearDatos');
+      let params = {Provincia: this.state.listaProv[this.state.provincia].nombre};
+      let datos = await axios.post('http://192.168.0.46:9898/tipologia/provincia', params);
+      let lista = await datos.data;
+      commit('guardarTipologia', lista);
+      datos = await axios.post('http://192.168.0.46:9898/area/provincia', params);
+      lista = await datos.data;
+      commit('guardarArea', lista);
+      datos = await axios.post('http://192.168.0.46:9898/pueblos/provincia', params);
+      lista = await datos.data;
+      commit('guardarPueblos', lista);
+      datos = await axios.post('http://192.168.0.46:9898/grupos/provincia', params);
+      lista = await datos.data;
+      commit('guardarGrupos', lista);
+      datos = await axios.post('http://192.168.0.46:9898/paises/provincia', params);
+      lista = await datos.data;
+      commit('guardarPaises', lista);
+      datos = await axios.post('http://192.168.0.46:9898/escolaridad/provincia', params);
+      lista = await datos.data;
+      commit('guardarEscolaridad', lista);
+      datos = await axios.post('http://192.168.0.46:9898/piramide/provincia', params);
+      lista = await datos.data;
+      commit('guardarPiramide', lista);
+    },
+    datosLocalidad: async function({commit}){
+      commit('resetearDatos');
+      let params = {Comuna: this.state.comuna, Localidad: this.state.localidad};
+      let datos = await axios.post('http://192.168.0.46:9898/tipologia/localidad', params);
+      let lista = await datos.data;
+      commit('guardarTipologia', lista);
+      datos = await axios.post('http://192.168.0.46:9898/area/localidad', params);
+      lista = await datos.data;
+      commit('guardarArea', lista);
+      datos = await axios.post('http://192.168.0.46:9898/pueblos/localidad', params);
+      lista = await datos.data;
+      commit('guardarPueblos', lista);
+      datos = await axios.post('http://192.168.0.46:9898/grupos/localidad', params);
+      lista = await datos.data;
+      commit('guardarGrupos', lista);
+      datos = await axios.post('http://192.168.0.46:9898/paises/localidad', params);
+      lista = await datos.data;
+      commit('guardarPaises', lista);
+      datos = await axios.post('http://192.168.0.46:9898/escolaridad/localidad', params);
+      lista = await datos.data;
+      commit('guardarEscolaridad', lista);
+      datos = await axios.post('http://192.168.0.46:9898/piramide/localidad', params);
       lista = await datos.data;
       commit('guardarPiramide', lista);
     }
