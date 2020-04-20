@@ -49,7 +49,7 @@
       }
     },
     computed: {
-      ...mapState(['listaCirc']),
+      ...mapState(['listaCirc', 'comuna', 'tipologia', 'area', 'pueblos', 'grupos', 'paises', 'escolaridad', 'piramide']),
 
       actualizarCircunscripcion: {
         get: function () {
@@ -63,10 +63,14 @@
       }
     },
     methods: {
-      ...mapActions(['getCircunscripciones']),
+      ...mapActions(['getCircunscripciones', 'datosComuna', 'datosCircunscripcion']),
 
       disteClick(){
-        console.log("Obtener datos de la API")
+        if(this.comuna !== null){
+          this.datosComuna();
+        }else{
+          this.datosCircunscripcion();
+        }
       },
       listarComunas: function(){
         return this.$store.commit('getComunasCircunscripcion', this.actualizarCircunscripcion);

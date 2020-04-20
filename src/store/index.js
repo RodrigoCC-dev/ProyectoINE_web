@@ -37,37 +37,19 @@ export default new Vuex.Store({
     piramide: null
   },
   mutations: {
-    /*/async getRegiones(){
-    //  let datos = await axios.get('http://192.168.0.30:9898/listar/regiones')
-    //  console.log(datos.data);
-    //  this.regiones = await datos.data
-    //},*/
 
+    // Métodos para actualizar listados
     listarRegiones(state, lista){
       state.listaReg = lista
     },
-
-    // Método para actualizar listado de distritos
     obtenerDistritos(state, distritos){
       state.listaDist = distritos
-      console.log('State_listaDist', state.listaDist)
     },
     obtenerCircunscripciones(state, circunscripciones){
       state.listaCirc = circunscripciones
     },
     getComunasDistrito(state, numero){
-      let lista;
-      state.comuna = null;
-      if(state.listaDist.empty){
-        lista = [];
-      }else{
-        if(state.distrito !== null){
-          lista = state.listaDist[numero].listaComunas;
-        }else{
-          lista = [];
-        }
-      }
-      state.listaCom = lista;
+      state.listaCom = state.listaDist[numero].listaComunas
     },
     getComunasCircunscripcion(state, numero){
       state.listaCom = state.listaCirc[numero].listaComunas
@@ -87,6 +69,8 @@ export default new Vuex.Store({
       }
       state.listaLoc = state.listaCom[index].localidades
     },
+
+    // Métodos para guardar elecciones de valores
     seleccionDistrito(state, id){
       state.distrito = id
     },
@@ -101,6 +85,38 @@ export default new Vuex.Store({
     },
     seleccionRegion(state, id){
       state.region = id
+    },
+
+    // Métodos para guardar datos desde la API
+    guardarTipologia(state, lista){
+      state.tipologia = lista
+    },
+    guardarArea(state, lista){
+      state.area = lista
+    },
+    guardarPueblos(state, lista){
+      state.pueblos = lista
+    },
+    guardarGrupos(state, lista){
+      state.grupos = lista
+    },
+    guardarPaises(state, lista){
+      state.paises = lista
+    },
+    guardarEscolaridad(state, lista){
+      state.escolaridad = lista
+    },
+    guardarPiramide(state, lista){
+      state.piramide = lista
+    },
+    resetearDatos(state){
+      state.tipologia = null;
+      state.area = null;
+      state.pueblos = null;
+      state.grupos = null;
+      state.paises = null;
+      state.escolaridad = null;
+      state.piramide = null;
     }
   },
   actions: {
@@ -118,6 +134,81 @@ export default new Vuex.Store({
       let datos = await axios.get('http://192.168.0.46:9898/listar/distritos')
       let lista = datos.data
       commit('obtenerCircunscripciones', lista)
+    },
+    datosComuna: async function({commit}){
+      commit('resetearDatos');
+      let params = {Comuna: this.state.comuna};
+      let datos = await axios.post('http://192.168.0.46:9898/tipologia/comuna', params);
+      let lista = await datos.data;
+      commit('guardarTipologia', lista);
+      datos = await axios.post('http://192.168.0.46:9898/area/comuna', params);
+      lista = await datos.data;
+      commit('guardarArea', lista);
+      datos = await axios.post('http://192.168.0.46:9898/pueblos/comuna', params);
+      lista = await datos.data;
+      commit('guardarPueblos', lista);
+      datos = await axios.post('http://192.168.0.46:9898/grupos/comuna', params);
+      lista = await datos.data;
+      commit('guardarGrupos', lista);
+      datos = await axios.post('http://192.168.0.46:9898/paises/comuna', params);
+      lista = await datos.data;
+      commit('guardarPaises', lista);
+      datos = await axios.post('http://192.168.0.46:9898/escolaridad/comuna', params);
+      lista = await datos.data;
+      commit('guardarEscolaridad', lista);
+      datos = await axios.post('http://192.168.0.46:9898/piramide/comuna', params);
+      lista = await datos.data;
+      commit('guardarPiramide', lista);
+    },
+    datosDistrito: async function({commit}){
+      commit('resetearDatos');
+      let params = {Distrito: this.state.listaDist[this.state.distrito].numero};
+      let datos = await axios.post('http://192.168.0.46:9898/tipologia/distrito', params);
+      let lista = await datos.data;
+      commit('guardarTipologia', lista);
+      datos = await axios.post('http://192.168.0.46:9898/area/distrito', params);
+      lista = await datos.data;
+      commit('guardarArea', lista);
+      datos = await axios.post('http://192.168.0.46:9898/pueblos/distrito', params);
+      lista = await datos.data;
+      commit('guardarPueblos', lista);
+      datos = await axios.post('http://192.168.0.46:9898/grupos/distrito', params);
+      lista = await datos.data;
+      commit('guardarGrupos', lista);
+      datos = await axios.post('http://192.168.0.46:9898/paises/distrito', params);
+      lista = await datos.data;
+      commit('guardarPaises', lista);
+      datos = await axios.post('http://192.168.0.46:9898/escolaridad/distrito', params);
+      lista = await datos.data;
+      commit('guardarEscolaridad', lista);
+      datos = await axios.post('http://192.168.0.46:9898/piramide/distrito', params);
+      lista = await datos.data;
+      commit('guardarPiramide', lista);
+    },
+    datosCircunscripcion: async function({commit}){
+      commit('resetearDatos');
+      let params = {Circunscripcion: this.state.listaCirc[this.state.circunscripcion].numero};
+      let datos = await axios.post('http://192.168.0.46:9898/tipologia/circunscripcion', params);
+      let lista = await datos.data;
+      commit('guardarTipologia', lista);
+      datos = await axios.post('http://192.168.0.46:9898/area/circunscripcion', params);
+      lista = await datos.data;
+      commit('guardarArea', lista);
+      datos = await axios.post('http://192.168.0.46:9898/pueblos/circunscripcion', params);
+      lista = await datos.data;
+      commit('guardarPueblos', lista);
+      datos = await axios.post('http://192.168.0.46:9898/grupos/circunscripcion', params);
+      lista = await datos.data;
+      commit('guardarGrupos', lista);
+      datos = await axios.post('http://192.168.0.46:9898/paises/circunscripcion', params);
+      lista = await datos.data;
+      commit('guardarPaises', lista);
+      datos = await axios.post('http://192.168.0.46:9898/escolaridad/circunscripcion', params);
+      lista = await datos.data;
+      commit('guardarEscolaridad', lista);
+      datos = await axios.post('http://192.168.0.46:9898/piramide/circunscripcion', params);
+      lista = await datos.data;
+      commit('guardarPiramide', lista);
     }
   },
   modules: {

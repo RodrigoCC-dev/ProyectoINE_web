@@ -18,7 +18,9 @@
             <b-col md="6">
               <SelectComuna></SelectComuna>
             </b-col>
-            <div>
+          </b-row>
+          <b-row>
+            <div class="d-flex" md="4">
               <b-button class="btn btn-success" v-on:click="disteClick">Obtener Datos</b-button>
             </div>
           </b-row>
@@ -47,7 +49,7 @@
       return{}
     },
     computed:{
-      ...mapState(['listaDist']),
+      ...mapState(['listaDist', 'comuna', 'tipologia', 'area', 'pueblos', 'grupos', 'paises', 'escolaridad', 'piramide']),
 
       actualizarDistrito: {
         get: function(){
@@ -61,10 +63,14 @@
       }
     },
     methods:{
-      ...mapActions(['getDistritos']),
+      ...mapActions(['getDistritos', 'datosComuna', 'datosDistrito']),
 
       disteClick(){
-        console.log("Obtener Datos API")
+        if(this.comuna !== null){
+          this.datosComuna();
+        }else{
+          this.datosDistrito();
+        }
       },
       listarComunas: function(){
         return this.$store.commit('getComunasDistrito', this.actualizarDistrito);
