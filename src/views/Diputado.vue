@@ -13,7 +13,6 @@
                 <b-form-select-option :value='null'>Seleccione un Distrito</b-form-select-option>
                 <b-form-select-option v-for="(item, index) of listaDist" :key="item.id" :value="index">Número Distrito: {{item.numero}}</b-form-select-option>
               </b-form-select>
-              <p>Selección: {{actualizarDistrito}}</p>
             </b-col>
             <b-col md="6">
               <SelectComuna></SelectComuna>

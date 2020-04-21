@@ -13,7 +13,6 @@
                 <b-form-select-option :value="null">Seleccione Circunscripción</b-form-select-option>
                 <b-form-select-option v-for="(item, index) of listaCirc" :key="item.id" :value="index">Circunscripción #: {{item.numero}}</b-form-select-option>
               </b-form-select>
-              <p>Selección: {{actualizarCircunscripcion}}</p>
             </b-col>
             <b-col md="6">
               <SelectComuna></SelectComuna>

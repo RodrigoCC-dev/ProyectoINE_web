@@ -5,7 +5,6 @@
       <b-form-select-option :value="null">Seleccionar Comuna</b-form-select-option>
       <b-form-select-option v-for="item of listaCom" :key="item.id" :value="item.nombre">{{item.numero}} - {{item.nombre}}</b-form-select-option>
     </b-form-select>
-    <p>Selección: {{actualizarComuna}}</p>
   </div>
 
 </template>

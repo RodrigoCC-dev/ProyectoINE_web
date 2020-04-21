@@ -5,7 +5,6 @@
       <b-form-select-option :value='null'>Seleccione una Provincia</b-form-select-option>
       <b-form-select-option v-for="(item, index) of listaProv" :key="item.id" :value="index">{{item.numero}} - {{item.nombre}}</b-form-select-option>
     </b-form-select>
-    <p>Selección: {{actualizarProvincia}}</p>
   </div>
 
 </template>
