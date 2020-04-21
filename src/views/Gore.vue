@@ -25,6 +25,7 @@
       </div>
       <div>
         <StatusAPI></StatusAPI>
+        <Loading></Loading>
       </div>
     </div>
   </div>
@@ -37,6 +38,7 @@
   import SelectProvincia from '@/components/SelectProvincia.vue'
   import SelectComuna from '@/components/SelectComuna.vue'
   import StatusAPI from '@/components/StatusAPI.vue'
+  import Loading from '@/components/Loading.vue'
 
   import {mapState, mapActions} from 'vuex'
 
@@ -47,7 +49,8 @@
       SelectRegion,
       SelectProvincia,
       SelectComuna,
-      StatusAPI
+      StatusAPI,
+      Loading
     },
     data(){
       return{

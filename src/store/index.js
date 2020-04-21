@@ -43,7 +43,7 @@ export default new Vuex.Store({
       status: false
     },
     listados: {
-      progreso: 0,
+      progreso: 20,
       status: false
     }
   },
@@ -147,19 +147,31 @@ export default new Vuex.Store({
   },
   actions: {
     getRegiones: async function({commit}){
-      let datos = await axios.get('http://192.168.0.46:9898/listar/regiones')
-      let lista = await datos.data
-      commit('listarRegiones', lista)
+      commit('cambiarStatusListados');
+      let datos = await axios.get('http://192.168.0.46:9898/listar/regiones');
+      let lista = await datos.data;
+      commit('listarRegiones', lista);
+      commit('cambiarProgesoListados', 100);
+      commit('cambiarStatusListados');
+      commit('cambiarProgesoListados', 20);
     },
     getDistritos: async function({commit}){
-      let datos = await axios.get('http://192.168.0.46:9898/listar/distritos')
-      let lista = datos.data
-      commit('obtenerDistritos', lista)
+      commit('cambiarStatusListados');
+      let datos = await axios.get('http://192.168.0.46:9898/listar/distritos');
+      let lista = datos.data;
+      commit('obtenerDistritos', lista);
+      commit('cambiarProgesoListados', 100);
+      commit('cambiarStatusListados');
+      commit('cambiarProgesoListados', 20);
     },
     getCircunscripciones: async function({commit}){
-      let datos = await axios.get('http://192.168.0.46:9898/listar/distritos')
-      let lista = datos.data
-      commit('obtenerCircunscripciones', lista)
+      commit('cambiarStatusListados');
+      let datos = await axios.get('http://192.168.0.46:9898/listar/distritos');
+      let lista = datos.data;
+      commit('obtenerCircunscripciones', lista);
+      commit('cambiarProgesoListados', 100);
+      commit('cambiarStatusListados');
+      commit('cambiarProgesoListados', 20);
     },
     datosComuna: async function({commit}){
       commit('resetearDatos');

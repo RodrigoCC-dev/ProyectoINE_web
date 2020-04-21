@@ -26,6 +26,7 @@
       </div>
       <div>
         <StatusAPI></StatusAPI>
+        <Loading></Loading>
       </div>
     </div>
   </div>
@@ -36,6 +37,7 @@
   import Bnavbar from '@/components/Bnavbar.vue'
   import SelectComuna from '@/components/SelectComuna.vue'
   import StatusAPI from '@/components/StatusAPI.vue'
+  import Loading from '@/components/Loading.vue'
 
   import {mapState, mapActions} from 'vuex'
 
@@ -44,7 +46,8 @@
     components: {
       Bnavbar,
       SelectComuna,
-      StatusAPI
+      StatusAPI,
+      Loading
     },
     data(){
       return {
