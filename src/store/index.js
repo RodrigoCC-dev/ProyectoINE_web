@@ -35,7 +35,17 @@ export default new Vuex.Store({
     grupos: null,
     paises: null,
     escolaridad: null,
-    piramide: null
+    piramide: null,
+
+    // Variables para alertas
+    datosAPI: {
+      progreso: 0,
+      status: false
+    },
+    listados: {
+      progreso: 0,
+      status: false
+    }
   },
   mutations: {
 
@@ -121,6 +131,18 @@ export default new Vuex.Store({
       state.paises = null;
       state.escolaridad = null;
       state.piramide = null;
+    },
+    cambiarStatusDatosAPI(state){
+      state.datosAPI.status = !state.datosAPI.status
+    },
+    cambiarProgresoDatosAPI(state, valor){
+      state.datosAPI.progreso = valor
+    },
+    cambiarStatusListados(state){
+      state.listados.status = !state.listados.status
+    },
+    cambiarProgesoListados(state, valor){
+      state.listados.progreso = valor
     }
   },
   actions: {
@@ -141,153 +163,213 @@ export default new Vuex.Store({
     },
     datosComuna: async function({commit}){
       commit('resetearDatos');
+      commit('cambiarStatusDatosAPI');
       let params = {Comuna: this.state.comuna};
       let datos = await axios.post('http://192.168.0.46:9898/tipologia/comuna', params);
       let lista = await datos.data;
       commit('guardarTipologia', lista);
+      commit('cambiarProgresoDatosAPI', 13);
       datos = await axios.post('http://192.168.0.46:9898/area/comuna', params);
       lista = await datos.data;
       commit('guardarArea', lista);
+      commit('cambiarProgresoDatosAPI', 26);
       datos = await axios.post('http://192.168.0.46:9898/pueblos/comuna', params);
       lista = await datos.data;
       commit('guardarPueblos', lista);
+      commit('cambiarProgresoDatosAPI', 39);
       datos = await axios.post('http://192.168.0.46:9898/grupos/comuna', params);
       lista = await datos.data;
       commit('guardarGrupos', lista);
+      commit('cambiarProgresoDatosAPI', 52);
       datos = await axios.post('http://192.168.0.46:9898/paises/comuna', params);
       lista = await datos.data;
       commit('guardarPaises', lista);
+      commit('cambiarProgresoDatosAPI', 65);
       datos = await axios.post('http://192.168.0.46:9898/escolaridad/comuna', params);
       lista = await datos.data;
       commit('guardarEscolaridad', lista);
+      commit('cambiarProgresoDatosAPI', 80);
       datos = await axios.post('http://192.168.0.46:9898/piramide/comuna', params);
       lista = await datos.data;
       commit('guardarPiramide', lista);
+      commit('cambiarProgresoDatosAPI', 100);
+      commit('cambiarStatusDatosAPI');
+      commit('cambiarProgresoDatosAPI', 0);
     },
     datosDistrito: async function({commit}){
       commit('resetearDatos');
+      commit('cambiarStatusDatosAPI');
       let params = {Distrito: this.state.listaDist[this.state.distrito].numero};
       let datos = await axios.post('http://192.168.0.46:9898/tipologia/distrito', params);
       let lista = await datos.data;
       commit('guardarTipologia', lista);
+      commit('cambiarProgresoDatosAPI', 13);
       datos = await axios.post('http://192.168.0.46:9898/area/distrito', params);
       lista = await datos.data;
       commit('guardarArea', lista);
+      commit('cambiarProgresoDatosAPI', 26);
       datos = await axios.post('http://192.168.0.46:9898/pueblos/distrito', params);
       lista = await datos.data;
       commit('guardarPueblos', lista);
+      commit('cambiarProgresoDatosAPI', 39);
       datos = await axios.post('http://192.168.0.46:9898/grupos/distrito', params);
       lista = await datos.data;
       commit('guardarGrupos', lista);
+      commit('cambiarProgresoDatosAPI', 52);
       datos = await axios.post('http://192.168.0.46:9898/paises/distrito', params);
       lista = await datos.data;
       commit('guardarPaises', lista);
+      commit('cambiarProgresoDatosAPI', 65);
       datos = await axios.post('http://192.168.0.46:9898/escolaridad/distrito', params);
       lista = await datos.data;
       commit('guardarEscolaridad', lista);
+      commit('cambiarProgresoDatosAPI', 80);
       datos = await axios.post('http://192.168.0.46:9898/piramide/distrito', params);
       lista = await datos.data;
       commit('guardarPiramide', lista);
+      commit('cambiarProgresoDatosAPI', 100);
+      commit('cambiarStatusDatosAPI');
+      commit('cambiarProgresoDatosAPI', 0);
     },
     datosCircunscripcion: async function({commit}){
       commit('resetearDatos');
+      commit('cambiarStatusDatosAPI');
       let params = {Circunscripcion: this.state.listaCirc[this.state.circunscripcion].numero};
       let datos = await axios.post('http://192.168.0.46:9898/tipologia/circunscripcion', params);
       let lista = await datos.data;
       commit('guardarTipologia', lista);
+      commit('cambiarProgresoDatosAPI', 13);
       datos = await axios.post('http://192.168.0.46:9898/area/circunscripcion', params);
       lista = await datos.data;
       commit('guardarArea', lista);
+      commit('cambiarProgresoDatosAPI', 26);
       datos = await axios.post('http://192.168.0.46:9898/pueblos/circunscripcion', params);
       lista = await datos.data;
       commit('guardarPueblos', lista);
+      commit('cambiarProgresoDatosAPI', 39);
       datos = await axios.post('http://192.168.0.46:9898/grupos/circunscripcion', params);
       lista = await datos.data;
       commit('guardarGrupos', lista);
+      commit('cambiarProgresoDatosAPI', 52);
       datos = await axios.post('http://192.168.0.46:9898/paises/circunscripcion', params);
       lista = await datos.data;
       commit('guardarPaises', lista);
+      commit('cambiarProgresoDatosAPI', 65);
       datos = await axios.post('http://192.168.0.46:9898/escolaridad/circunscripcion', params);
       lista = await datos.data;
       commit('guardarEscolaridad', lista);
+      commit('cambiarProgresoDatosAPI', 80);
       datos = await axios.post('http://192.168.0.46:9898/piramide/circunscripcion', params);
       lista = await datos.data;
       commit('guardarPiramide', lista);
+      commit('cambiarProgresoDatosAPI', 100);
+      commit('cambiarStatusDatosAPI');
+      commit('cambiarProgresoDatosAPI', 0);
     },
     datosRegion: async function({commit}){
       commit('resetearDatos');
+      commit('cambiarStatusDatosAPI');
       let params = {Region: this.state.listaReg[this.state.region].nombre}
       let datos = await axios.post('http://192.168.0.46:9898/tipologia/region', params);
       let lista = await datos.data;
       commit('guardarTipologia', lista);
+      commit('cambiarProgresoDatosAPI', 13);
       datos = await axios.post('http://192.168.0.46:9898/area/region', params);
       lista = await datos.data;
       commit('guardarArea', lista);
+      commit('cambiarProgresoDatosAPI', 26);
       datos = await axios.post('http://192.168.0.46:9898/pueblos/region', params);
       lista = await datos.data;
       commit('guardarPueblos', lista);
+      commit('cambiarProgresoDatosAPI', 39);
       datos = await axios.post('http://192.168.0.46:9898/grupos/region', params);
       lista = await datos.data;
       commit('guardarGrupos', lista);
+      commit('cambiarProgresoDatosAPI', 52);
       datos = await axios.post('http://192.168.0.46:9898/paises/region', params);
       lista = await datos.data;
       commit('guardarPaises', lista);
+      commit('cambiarProgresoDatosAPI', 65);
       datos = await axios.post('http://192.168.0.46:9898/escolaridad/region', params);
       lista = await datos.data;
       commit('guardarEscolaridad', lista);
+      commit('cambiarProgresoDatosAPI', 80);
       datos = await axios.post('http://192.168.0.46:9898/piramide/region', params);
       lista = await datos.data;
       commit('guardarPiramide', lista);
+      commit('cambiarProgresoDatosAPI', 100);
+      commit('cambiarStatusDatosAPI');
+      commit('cambiarProgresoDatosAPI', 0);
     },
     datosProvincia: async function({commit}){
       commit('resetearDatos');
+      commit('cambiarStatusDatosAPI');
       let params = {Provincia: this.state.listaProv[this.state.provincia].nombre};
       let datos = await axios.post('http://192.168.0.46:9898/tipologia/provincia', params);
       let lista = await datos.data;
       commit('guardarTipologia', lista);
+      commit('cambiarProgresoDatosAPI', 13);
       datos = await axios.post('http://192.168.0.46:9898/area/provincia', params);
       lista = await datos.data;
       commit('guardarArea', lista);
+      commit('cambiarProgresoDatosAPI', 26);
       datos = await axios.post('http://192.168.0.46:9898/pueblos/provincia', params);
       lista = await datos.data;
       commit('guardarPueblos', lista);
+      commit('cambiarProgresoDatosAPI', 39);
       datos = await axios.post('http://192.168.0.46:9898/grupos/provincia', params);
       lista = await datos.data;
       commit('guardarGrupos', lista);
+      commit('cambiarProgresoDatosAPI', 52);
       datos = await axios.post('http://192.168.0.46:9898/paises/provincia', params);
       lista = await datos.data;
       commit('guardarPaises', lista);
+      commit('cambiarProgresoDatosAPI', 65);
       datos = await axios.post('http://192.168.0.46:9898/escolaridad/provincia', params);
       lista = await datos.data;
       commit('guardarEscolaridad', lista);
+      commit('cambiarProgresoDatosAPI', 80);
       datos = await axios.post('http://192.168.0.46:9898/piramide/provincia', params);
       lista = await datos.data;
       commit('guardarPiramide', lista);
+      commit('cambiarProgresoDatosAPI', 100);
+      commit('cambiarStatusDatosAPI');
+      commit('cambiarProgresoDatosAPI', 0);
     },
     datosLocalidad: async function({commit}){
       commit('resetearDatos');
+      commit('cambiarStatusDatosAPI');
       let params = {Comuna: this.state.comuna, Localidad: this.state.localidad};
       let datos = await axios.post('http://192.168.0.46:9898/tipologia/localidad', params);
       let lista = await datos.data;
       commit('guardarTipologia', lista);
+      commit('cambiarProgresoDatosAPI', 13);
       datos = await axios.post('http://192.168.0.46:9898/area/localidad', params);
       lista = await datos.data;
       commit('guardarArea', lista);
+      commit('cambiarProgresoDatosAPI', 26);
       datos = await axios.post('http://192.168.0.46:9898/pueblos/localidad', params);
       lista = await datos.data;
       commit('guardarPueblos', lista);
+      commit('cambiarProgresoDatosAPI', 39);
       datos = await axios.post('http://192.168.0.46:9898/grupos/localidad', params);
       lista = await datos.data;
       commit('guardarGrupos', lista);
+      commit('cambiarProgresoDatosAPI', 52);
       datos = await axios.post('http://192.168.0.46:9898/paises/localidad', params);
       lista = await datos.data;
       commit('guardarPaises', lista);
+      commit('cambiarProgresoDatosAPI', 65);
       datos = await axios.post('http://192.168.0.46:9898/escolaridad/localidad', params);
       lista = await datos.data;
       commit('guardarEscolaridad', lista);
+      commit('cambiarProgresoDatosAPI', 80);
       datos = await axios.post('http://192.168.0.46:9898/piramide/localidad', params);
       lista = await datos.data;
       commit('guardarPiramide', lista);
+      commit('cambiarProgresoDatosAPI', 100);
+      commit('cambiarStatusDatosAPI');
+      commit('cambiarProgresoDatosAPI', 0);
     }
   },
   modules: {

@@ -34,6 +34,9 @@
           </b-row>
         </form>
       </div>
+      <div>
+        <StatusAPI></StatusAPI>
+      </div>
     </div>
   </div>
 </template>
@@ -44,6 +47,7 @@
   import SelectRegion from '@/components/SelectRegion.vue'
   import SelectProvincia from '@/components/SelectProvincia.vue'
   import SelectComuna from '@/components/SelectComuna.vue'
+  import StatusAPI from '@/components/StatusAPI.vue'
 
   import {mapState, mapActions} from 'vuex'
 
@@ -53,7 +57,8 @@
       Bnavbar,
       SelectRegion,
       SelectProvincia,
-      SelectComuna
+      SelectComuna,
+      StatusAPI
     },
     data(){
       return{

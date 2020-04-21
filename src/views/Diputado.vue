@@ -24,7 +24,11 @@
               <b-button class="btn btn-success btn-block" v-on:click="disteClick">Obtener Datos</b-button>
             </b-col>
           </b-row>
+
         </form>
+      </div>
+      <div>
+        <StatusAPI></StatusAPI>
       </div>
     </div>
   </div>
@@ -34,6 +38,7 @@
 
   import Bnavbar from '@/components/Bnavbar.vue'
   import SelectComuna from '@/components/SelectComuna.vue'
+  import StatusAPI from '@/components/StatusAPI.vue'
 
   import {mapState, mapActions} from 'vuex'
 
@@ -41,7 +46,8 @@
     name: 'Diputado',
     components: {
       Bnavbar,
-      SelectComuna
+      SelectComuna,
+      StatusAPI
     },
     data(){
       return{}

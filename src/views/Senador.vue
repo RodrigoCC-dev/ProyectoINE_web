@@ -24,6 +24,9 @@
           </b-row>
         </form>
       </div>
+      <div>
+        <StatusAPI></StatusAPI>
+      </div>
     </div>
   </div>
 </template>
@@ -32,6 +35,7 @@
 
   import Bnavbar from '@/components/Bnavbar.vue'
   import SelectComuna from '@/components/SelectComuna.vue'
+  import StatusAPI from '@/components/StatusAPI.vue'
 
   import {mapState, mapActions} from 'vuex'
 
@@ -39,7 +43,8 @@
     name: 'Senador',
     components: {
       Bnavbar,
-      SelectComuna
+      SelectComuna,
+      StatusAPI
     },
     data(){
       return {
