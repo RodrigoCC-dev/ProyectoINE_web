@@ -8,16 +8,18 @@
       <div class="mx-5 mt-5">
         <form>
           <b-row md="6">
-            <b-col md="6">
+            <b-col md="6" class="my-3">
               <b-form-select v-model="actualizarCircunscripcion">
                 <b-form-select-option :value="null">Seleccione Circunscripción</b-form-select-option>
                 <b-form-select-option v-for="(item, index) of listaCirc" :key="item.id" :value="index">Circunscripción #: {{item.numero}}</b-form-select-option>
               </b-form-select>
             </b-col>
-            <b-col md="6">
+            <b-col md="6" class="my-3">
               <SelectComuna></SelectComuna>
             </b-col>
-            <b-col md="12">
+          </b-row>
+          <b-row>
+            <b-col md="12" class="my-3">
               <b-button class="btn btn-success btn-block" v-on:click="disteClick">Obtener Datos</b-button>
             </b-col>
           </b-row>

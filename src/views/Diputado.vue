@@ -8,18 +8,18 @@
       <div class="mx-5 mt-5">
         <form>
           <b-row>
-            <b-col md="6">
+            <b-col md="6" class="my-3">
               <b-form-select v-model="actualizarDistrito">
                 <b-form-select-option :value='null'>Seleccione un Distrito</b-form-select-option>
                 <b-form-select-option v-for="(item, index) of listaDist" :key="item.id" :value="index">Número Distrito: {{item.numero}}</b-form-select-option>
               </b-form-select>
             </b-col>
-            <b-col md="6">
+            <b-col md="6" class="my-3">
               <SelectComuna></SelectComuna>
             </b-col>
           </b-row>
           <b-row>
-            <b-col md="12">
+            <b-col md="12" class="my-3">
               <b-button class="btn btn-success btn-block" v-on:click="disteClick">Obtener Datos</b-button>
             </b-col>
           </b-row>
@@ -29,6 +29,17 @@
       <div>
         <StatusAPI></StatusAPI>
         <Loading></Loading>
+      </div>
+      <div>
+        <b-row>
+          <b-col md="8" class="my-2">
+            <strong class="text-info">Distribución de años de Escolaridad</strong>
+            <EscolaridadChart></EscolaridadChart>
+          </b-col>
+          <b-col md="4" class="my-2">
+            <strong class="text-info">Distribución de años de Escolaridad</strong>
+          </b-col>
+        </b-row>
       </div>
     </div>
   </div>
@@ -40,6 +51,7 @@
   import SelectComuna from '@/components/SelectComuna.vue'
   import StatusAPI from '@/components/StatusAPI.vue'
   import Loading from '@/components/Loading.vue'
+  import EscolaridadChart from '@/components/EscolaridadChart.vue'
 
   import {mapState, mapActions} from 'vuex'
 
@@ -49,13 +61,14 @@
       Bnavbar,
       SelectComuna,
       StatusAPI,
-      Loading
+      Loading,
+      EscolaridadChart
     },
     data(){
       return{}
     },
     computed:{
-      ...mapState(['listaDist', 'comuna', 'tipologia', 'area', 'pueblos', 'grupos', 'paises', 'escolaridad', 'piramide']),
+      ...mapState(['listaDist', 'comuna', 'tipologia', 'area', 'pueblos', 'grupos', 'paises', 'escolaridad', 'piramide', 'mostrarGraficos']),
 
       actualizarDistrito: {
         get: function(){
@@ -85,6 +98,7 @@
     mounted(){
       this.getDistritos();
       this.$store.commit('seleccionDistrito', null);
+      this.$store.commit('desplegarGraficos', false);
     }
   }
 

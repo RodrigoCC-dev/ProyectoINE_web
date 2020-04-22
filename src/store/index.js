@@ -47,7 +47,9 @@ export default new Vuex.Store({
     listados: {
       progreso: 20,
       status: false
-    }
+    },
+
+    mostrarGraficos: false
   },
   mutations: {
 
@@ -145,6 +147,9 @@ export default new Vuex.Store({
     },
     cambiarProgesoListados(state, valor){
       state.listados.progreso = valor
+    },
+    desplegarGraficos(state, valor){
+      state.mostrarGraficos = valor
     }
   },
   actions: {

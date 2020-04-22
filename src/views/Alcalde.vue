@@ -8,18 +8,18 @@
       <div class="mx-5 mt-5">
         <form>
           <b-row>
-            <b-col md="4">
+            <b-col md="4" class="my-3">
               <SelectRegion></SelectRegion>
             </b-col>
-            <b-col md="4">
+            <b-col md="4" class="my-3">
               <SelectProvincia></SelectProvincia>
             </b-col>
-            <b-col md="4">
+            <b-col md="4" class="my-3">
               <SelectComuna></SelectComuna>
             </b-col>
           </b-row>
           <b-row>
-            <b-col md="12">
+            <b-col md="12" class="my-3">
               <b-button class="btn btn-success btn-block" v-on:click="disteClick">Obtener Datos</b-button>
             </b-col>
           </b-row>
