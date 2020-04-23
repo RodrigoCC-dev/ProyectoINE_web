@@ -1,20 +1,15 @@
 <template>
-  <div class="container">
-    <BarChart v-if="mostrarGraficos" :chartdata="chartdata" :options="opciones"></BarChart>
+  <div>
+    <column-chart :data="escolaridad" legend="right" round="2" label="Años de Escolaridad" suffix="%"></column-chart>
   </div>
 </template>
 
 <script>
 
-  import BarChart from '@/components/BarChart.vue'
-
   import {mapState} from 'vuex'
 
   export default {
     name: 'EscolaridadChart',
-    components: {
-      BarChart
-    },
     data(){
       return {
         chartdata: null,
