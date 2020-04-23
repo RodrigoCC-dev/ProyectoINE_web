@@ -31,15 +31,7 @@
         <Loading></Loading>
       </div>
       <div>
-        <b-row>
-          <b-col md="8" class="my-2">
-            <strong class="text-info">Distribución de años de Escolaridad</strong>
-            <EscolaridadChart></EscolaridadChart>
-          </b-col>
-          <b-col md="4" class="my-2">
-            <strong class="text-info">Distribución de años de Escolaridad</strong>
-          </b-col>
-        </b-row>
+        <Graficos></Graficos>
       </div>
     </div>
   </div>
@@ -51,7 +43,7 @@
   import SelectComuna from '@/components/SelectComuna.vue'
   import StatusAPI from '@/components/StatusAPI.vue'
   import Loading from '@/components/Loading.vue'
-  import EscolaridadChart from '@/components/EscolaridadChart.vue'
+  import Graficos from '@/components/Graficos.vue'
 
   import {mapState, mapActions} from 'vuex'
 
@@ -62,7 +54,7 @@
       SelectComuna,
       StatusAPI,
       Loading,
-      EscolaridadChart
+      Graficos
     },
     data(){
       return{}
