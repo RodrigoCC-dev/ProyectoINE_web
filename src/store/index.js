@@ -107,25 +107,120 @@ export default new Vuex.Store({
 
     // Métodos para guardar datos desde la API
     guardarTipologia(state, lista){
-      state.tipologia = lista
+      let datos = {};
+      datos['Unipersonal'] = lista.unipersonal
+      datos['Compuesto'] = lista.compuesto
+      datos['Extenso'] = lista.extenso
+      datos['Sin Nucleo'] = lista.sinNucleo
+      datos['Monoparental'] = lista.monoParental
+      datos['Parejas Sin Hijos'] = lista.parejasSinHijos
+      datos['Parejas Con Hijos'] = lista.parejasConHijos
+      state.tipologia = datos
     },
     guardarArea(state, lista){
-      state.area = lista
+      let datos = {};
+      datos['Urbana'] = lista.urbana;
+      datos['Rural'] = lista.rural;
+      state.area = datos;
     },
     guardarPueblos(state, lista){
-      state.pueblos = lista
+      let datos = {};
+      datos['Mapuche'] = lista.mapuche;
+      datos['Aymara'] = lista.aymara;
+      datos['Rapa Nui'] = lista.rapaNui;
+      datos['Lican Antai'] = lista.licanAntai;
+      datos['Quechua'] = lista.quechua;
+      datos['Colla'] = lista.colla;
+      datos['Diaguita'] = lista.diaguita;
+      datos['Kawésqar'] = lista.kawesqar;
+      datos['Yagán o Yámara'] = lista.yagan;
+      datos['Otro'] = lista.otro;
+      datos['Ignorado'] = lista.ignorado;
+      state.pueblos = datos;
     },
     guardarGrupos(state, lista){
-      state.grupos = lista
+      let datos = {}
+      datos['Menores a 15 años'] = lista.menoresA15
+      datos['15 a 64 años'] = lista.entre15y65
+      datos['65 años o más'] = lista.masDe65
+      state.grupos = datos
     },
     guardarPaises(state, lista){
-      state.paises = lista
+      let datos = {}
+      datos['Perú'] = lista.peru
+      datos['Colombia'] = lista.colombia
+      datos['Argentina'] = lista.argentina
+      datos['Bolivia'] = lista.bolivia
+      datos['Venezuela'] = lista.venezuela
+      datos['Ecuador'] = lista.ecuador
+      datos['Haití'] = lista.haiti
+      datos['Otro'] = lista.otro
+      datos['Ignorado'] = lista.ignorado
+      state.paises = datos
     },
     guardarEscolaridad(state, lista){
+      let datos = {}
+      datos['5 años o más de edad'] = lista.masDe5
+      datos['15 años o más de edad'] = lista.masDe15
+      datos['19 años o más de edad'] = lista.masDe19
+      datos['25 años o más de edad'] = lista.masDe25
       state.escolaridad = lista
     },
     guardarPiramide(state, lista){
-      state.piramide = lista
+      let datos = [];
+      let info = {};
+      let etiqueta = {};
+      info['100+'] = lista.hombre.masDe100;
+      info['95-99'] = lista.hombre.entre95y99;
+      info['90-94'] = lista.hombre.entre90y94;
+      info['85-89'] = lista.hombre.entre85y89;
+      info['80-84'] = lista.hombre.entre80y84;
+      info['75-79'] = lista.hombre.entre75y79;
+      info['70-74'] = lista.hombre.entre70y74;
+      info['65-69'] = lista.hombre.entre65y69;
+      info['60-64'] = lista.hombre.entre60y64;
+      info['55-59'] = lista.hombre.entre55y59;
+      info['50-54'] = lista.hombre.entre50y54;
+      info['45-49'] = lista.hombre.entre45y49;
+      info['40-44'] = lista.hombre.entre40y44;
+      info['35-39'] = lista.hombre.entre35y39;
+      info['30-34'] = lista.hombre.entre30y34;
+      info['25-29'] = lista.hombre.entre25y29;
+      info['20-24'] = lista.hombre.entre20y24;
+      info['15-19'] = lista.hombre.entre15y19;
+      info['10-14'] = lista.hombre.entre10y14;
+      info['5-9'] = lista.hombre.entre5y9;
+      info['0-4'] = lista.hombre.entre0y4;
+      etiqueta['name'] = 'Hombre';
+      etiqueta['data'] = info;
+      datos.push(etiqueta);
+      info = {};
+      etiqueta = {};
+      info['100+'] = lista.mujer.masDe100;
+      info['95-99'] = lista.mujer.entre95y99;
+      info['90-94'] = lista.mujer.entre90y94;
+      info['85-89'] = lista.mujer.entre85y89;
+      info['80-84'] = lista.mujer.entre80y84;
+      info['75-79'] = lista.mujer.entre75y79;
+      info['70-74'] = lista.mujer.entre70y74;
+      info['65-69'] = lista.mujer.entre65y69;
+      info['60-64'] = lista.mujer.entre60y64;
+      info['55-59'] = lista.mujer.entre55y59;
+      info['50-54'] = lista.mujer.entre50y54;
+      info['45-49'] = lista.mujer.entre45y49;
+      info['40-44'] = lista.mujer.entre40y44;
+      info['35-39'] = lista.mujer.entre35y39;
+      info['30-34'] = lista.mujer.entre30y34;
+      info['25-29'] = lista.mujer.entre25y29;
+      info['20-24'] = lista.mujer.entre20y24;
+      info['15-19'] = lista.mujer.entre15y19;
+      info['10-14'] = lista.mujer.entre10y14;
+      info['5-9'] = lista.mujer.entre5y9;
+      info['0-4'] = lista.mujer.entre0y4;
+      etiqueta['name'] = 'Mujer';
+      etiqueta['data'] = info;
+      datos.push(etiqueta);
+      state.piramide = datos
     },
     resetearDatos(state){
       state.tipologia = null;
