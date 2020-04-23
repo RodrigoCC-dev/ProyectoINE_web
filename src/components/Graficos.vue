@@ -1,12 +1,8 @@
 <template>
-  <div class="container">
+  <div class="mx-5">
     <b-row>
-      <b-col md="8" class="my-2">
-        <strong class="text-info">Distribución de la población según Tipología del Hogar</strong>
+      <b-col md="12">
         <TipologiaChart></TipologiaChart>
-      </b-col>
-      <b-col md="4" class="my-2">
-        <strong class="text-info">Distribución de la población según Tipología del Hogar</strong>
       </b-col>
     </b-row>
     <b-row>
@@ -39,7 +35,7 @@
     </b-row>
     <b-row>
       <b-col md="8" class="my-2">
-        <strong class="text-info">Distribución de años de Escolaridad</strong>
+        <strong class="text-info">Distribución de población según años de Escolaridad</strong>
         <EscolaridadChart></EscolaridadChart>
       </b-col>
       <b-col></b-col>
@@ -77,7 +73,7 @@
       PiramideChart
     },
     computed:{
-      ...mapState(['tipologia'])
+      ...mapState(['tipologia', 'area', 'pueblos', 'grupos', 'paises', 'escolaridad', 'piramide'])
     }
   }
 </script>

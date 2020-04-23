@@ -1,6 +1,32 @@
 <template>
-  <div>
-    <pie-chart :data="tipologia" legend="right" suffix="%" :round="2"></pie-chart>
+  <div class="mt-3">
+    <b-card-group deck>
+    <div class="card border-light mb-3" style="width: 80rem;">
+      <div class="card-header">Distribución de la población según Tipología del Hogar</div>
+      <div class="card-body">
+        <div class="container">
+          <pie-chart :data="tipologia" legend="right" suffix="%" :round="2"></pie-chart>
+        </div>
+      </div>
+    </div>
+    <div class="car border-light mb-3 pr-3" style="width: 30rem;">
+      <div class="card-header">Distribución de la población según Tipología del Hogar</div>
+      <div class="card-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Tipo de Hogar</th>
+              <th scope="col">Distribución porcentual</th>
+            </tr>
+          </thead>
+          <tbody v-for="(value, key) of tipologia">
+            <th scope="row">{{key}}</th>
+            <td>{{Math.round(value*100)/100}}%</td>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </b-card-group>
   </div>
 </template>
 
