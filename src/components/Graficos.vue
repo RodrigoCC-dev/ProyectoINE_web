@@ -6,25 +6,19 @@
       </b-col>
     </b-row>
     <b-row>
-      <b-col md="8" class="my-2">
-        <strong class="text-info">Distribución de la población según Área urbana y rural</strong>
+      <b-col md="12">
         <AreaChart></AreaChart>
       </b-col>
-      <b-col></b-col>
     </b-row>
     <b-row>
-      <b-col md="8" class="my-2">
-        <strong class="text-info">Distribución de la población según Pueblos Originarios</strong>
+      <b-col md="12">
         <PueblosChart></PueblosChart>
       </b-col>
-      <b-col></b-col>
     </b-row>
     <b-row>
-      <b-col md="8" class="my-2">
-        <strong class="text-info">Distribución de la población según Grupos Etarios</strong>
+      <b-col md="12">
         <GruposChart></GruposChart>
       </b-col>
-      <b-col></b-col>
     </b-row>
     <b-row>
       <b-col md="8" class="my-2">
