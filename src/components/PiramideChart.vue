@@ -1,7 +1,7 @@
 <template>
   <div class="mt-3">
     <b-card-group deck>
-      <b-card bg-variant="ligth" :header="titulo" class="text-left">
+      <b-card bg-variant="light" :header="titulo" class="text-left">
         <b-card-text>
           <bar-chart :data="piramide" legend="bottom"></bar-chart>
         </b-card-text>
@@ -60,6 +60,9 @@
         this.datosTabla = datos;
         return this.datosTabla;
       }
+    },
+    updated(){
+      this.transformarDatos();
     }
   }
 </script>

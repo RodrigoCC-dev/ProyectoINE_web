@@ -29,6 +29,9 @@
         <StatusAPI></StatusAPI>
         <Loading></Loading>
       </div>
+      <div>
+        <Graficos v-if="mostrarGraficos"></Graficos>
+      </div>
     </div>
   </div>
 </template>
@@ -41,6 +44,7 @@
   import SelectComuna from '@/components/SelectComuna.vue'
   import StatusAPI from '@/components/StatusAPI.vue'
   import Loading from '@/components/Loading.vue'
+  import Graficos from '@/components/Graficos.vue'
 
   import {mapState, mapActions} from 'vuex'
 
@@ -52,7 +56,8 @@
       SelectProvincia,
       SelectComuna,
       StatusAPI,
-      Loading
+      Loading,
+      Graficos
     },
     data(){
       return{
@@ -60,7 +65,7 @@
       }
     },
     computed: {
-      ...mapState(['region', 'provincia', 'comuna', 'tipologia', 'area', 'pueblos', 'grupos', 'paises', 'escolaridad', 'piramide'])
+      ...mapState(['region', 'provincia', 'comuna', 'mostrarGraficos'])
     },
     methods: {
       ...mapActions(['datosRegion', 'datosProvincia', 'datosComuna']),
@@ -73,7 +78,11 @@
         }else{
           this.datosRegion();
         }
+        this.$store.commit('desplegarGraficos', true);
       }
+    },
+    mounted(){
+      this.$store.commit('desplegarGraficos', false);
     }
   }
 </script>

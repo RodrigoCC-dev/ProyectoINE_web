@@ -164,7 +164,7 @@ export default new Vuex.Store({
       datos['15 años o más de edad'] = lista.masDe15
       datos['19 años o más de edad'] = lista.masDe19
       datos['25 años o más de edad'] = lista.masDe25
-      state.escolaridad = lista
+      state.escolaridad = datos
     },
     guardarPiramide(state, lista){
       let datos = [];

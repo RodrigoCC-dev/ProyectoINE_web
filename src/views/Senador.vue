@@ -29,6 +29,9 @@
         <StatusAPI></StatusAPI>
         <Loading></Loading>
       </div>
+      <div>
+        <Graficos v-if="mostrarGraficos"></Graficos>
+      </div>
     </div>
   </div>
 </template>
@@ -39,6 +42,7 @@
   import SelectComuna from '@/components/SelectComuna.vue'
   import StatusAPI from '@/components/StatusAPI.vue'
   import Loading from '@/components/Loading.vue'
+  import Graficos from '@/components/Graficos.vue'
 
   import {mapState, mapActions} from 'vuex'
 
@@ -48,7 +52,8 @@
       Bnavbar,
       SelectComuna,
       StatusAPI,
-      Loading
+      Loading,
+      Graficos
     },
     data(){
       return {
@@ -56,7 +61,7 @@
       }
     },
     computed: {
-      ...mapState(['listaCirc', 'comuna', 'tipologia', 'area', 'pueblos', 'grupos', 'paises', 'escolaridad', 'piramide']),
+      ...mapState(['listaCirc', 'comuna', 'mostrarGraficos']),
 
       actualizarCircunscripcion: {
         get: function () {
@@ -78,6 +83,7 @@
         }else{
           this.datosCircunscripcion();
         }
+        this.$store.commit('desplegarGraficos', true);
       },
       listarComunas: function(){
         return this.$store.commit('getComunasCircunscripcion', this.actualizarCircunscripcion);
@@ -86,6 +92,7 @@
     mounted(){
       this.getCircunscripciones();
       this.$store.commit('seleccionCircunscripcion', null);
+      this.$store.commit('desplegarGraficos', false);
     }
   }
 </script>

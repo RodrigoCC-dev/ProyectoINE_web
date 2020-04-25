@@ -31,7 +31,7 @@
         <Loading></Loading>
       </div>
       <div>
-        <Graficos></Graficos>
+        <Graficos v-if="mostrarGraficos"></Graficos>
       </div>
     </div>
   </div>
@@ -82,6 +82,7 @@
         }else{
           this.datosDistrito();
         }
+        this.$store.commit('desplegarGraficos', true);
       },
       listarComunas: function(){
         return this.$store.commit('getComunasDistrito', this.actualizarDistrito);
