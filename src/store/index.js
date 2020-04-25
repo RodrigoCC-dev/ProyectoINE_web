@@ -42,11 +42,13 @@ export default new Vuex.Store({
     // Variables para alertas
     datosAPI: {
       progreso: 0,
-      status: false
+      status: false,
+      color: 'success'
     },
     listados: {
       progreso: 20,
-      status: false
+      status: false,
+      color: 'warning'
     },
 
     mostrarGraficos: false
@@ -237,11 +239,17 @@ export default new Vuex.Store({
     cambiarProgresoDatosAPI(state, valor){
       state.datosAPI.progreso = valor
     },
+    cambiarColorDatosAPI(state, color){
+      state.datosAPI.color = color
+    },
     cambiarStatusListados(state){
       state.listados.status = !state.listados.status
     },
-    cambiarProgesoListados(state, valor){
+    cambiarProgresoListados(state, valor){
       state.listados.progreso = valor
+    },
+    cambiarColorListados(state, color){
+      state.listados.color = color
     },
     desplegarGraficos(state, valor){
       state.mostrarGraficos = valor
@@ -250,246 +258,346 @@ export default new Vuex.Store({
   actions: {
     getRegiones: async function({commit}){
       commit('cambiarStatusListados');
-      let datos = await axios.get(`${this.state.baseURL}/listar/regiones`);
-      commit('cambiarProgesoListados', 60);
-      let lista = await datos.data;
-      commit('cambiarProgesoListados', 80);
-      commit('listarRegiones', lista);
-      commit('cambiarProgesoListados', 100);
-      commit('cambiarStatusListados');
-      commit('cambiarProgesoListados', 20);
+      try{
+        let datos = await axios.get(`${this.state.baseURL}/listar/regiones`);
+        commit('cambiarProgresoListados', 60);
+        let lista = await datos.data;
+        commit('cambiarProgresoListados', 80);
+        commit('listarRegiones', lista);
+        commit('cambiarProgresoListados', 100);
+        commit('cambiarStatusListados');
+        commit('cambiarProgresoListados', 20);
+      }
+      catch (e){
+        console.log(e);
+        commit('cambiarProgresoListados', 100);
+        commit('cambiarColorListados', 'danger');
+        alert('No es posible obtener los datos de la división política del país. Intente nuevamente recargando la página.');
+        commit('cambiarStatusListados');
+        commit('cambiarProgresoListados', 20);
+        commit('cambiarColorListados', 'warning');
+      }
     },
     getDistritos: async function({commit}){
       commit('cambiarStatusListados');
-      let datos = await axios.get(`${this.state.baseURL}/listar/distritos`);
-      commit('cambiarProgesoListados', 60);
-      let lista = datos.data;
-      commit('cambiarProgesoListados', 80);
-      commit('obtenerDistritos', lista);
-      commit('cambiarProgesoListados', 100);
-      commit('cambiarStatusListados');
-      commit('cambiarProgesoListados', 20);
+      try{
+        let datos = await axios.get(`${this.state.baseURL}/listar/distritos`);
+        commit('cambiarProgresoListados', 60);
+        let lista = datos.data;
+        commit('cambiarProgresoListados', 80);
+        commit('obtenerDistritos', lista);
+        commit('cambiarProgresoListados', 100);
+        commit('cambiarStatusListados');
+        commit('cambiarProgresoListados', 20);
+      }
+      catch (e){
+        console.log(e);
+        commit('cambiarProgresoListados', 100);
+        commit('cambiarColorListados', 'danger');
+        alert('No es posible obtener los datos de los distritos parlamentarios del país. Intente nuevamente recargando la página');
+        commit('cambiarStatusListados');
+        commit('cambiarProgresoListados', 20);
+        commit('cambiarColorListados', 'warning');
+      }
     },
     getCircunscripciones: async function({commit}){
       commit('cambiarStatusListados');
-      let datos = await axios.get(`${this.state.baseURL}/listar/circunscripciones`);
-      commit('cambiarProgesoListados', 60);
-      let lista = datos.data;
-      commit('cambiarProgesoListados', 80);
-      commit('obtenerCircunscripciones', lista);
-      commit('cambiarProgesoListados', 100);
-      commit('cambiarStatusListados');
-      commit('cambiarProgesoListados', 20);
+      try{
+        let datos = await axios.get(`${this.state.baseURL}/listar/circunscripciones`);
+        commit('cambiarProgresoListados', 60);
+        let lista = datos.data;
+        commit('cambiarProgresoListados', 80);
+        commit('obtenerCircunscripciones', lista);
+        commit('cambiarProgresoListados', 100);
+        commit('cambiarStatusListados');
+        commit('cambiarProgresoListados', 20);
+      }
+      catch (e){
+        console.log(e);
+        commit('cambiarProgresoListados', 100);
+        commit('cambiarColorListados', 'danger');
+        alert('No es posible obtener los datos de las circunscripciones senatoriales del país. Intente nuevamente recargando la página');
+        commit('cambiarStatusListados');
+        commit('cambiarProgresoListados', 20);
+        commit('cambiarColorListados', 'warning');
+      }
     },
     datosComuna: async function({commit}){
       commit('resetearDatos');
       commit('cambiarStatusDatosAPI');
-      let params = {Comuna: this.state.comuna};
-      let datos = await axios.post(`${this.state.baseURL}/tipologia/comuna`, params);
-      let lista = await datos.data;
-      commit('guardarTipologia', lista);
-      commit('cambiarProgresoDatosAPI', 13);
-      datos = await axios.post(`${this.state.baseURL}/area/comuna`, params);
-      lista = await datos.data;
-      commit('guardarArea', lista);
-      commit('cambiarProgresoDatosAPI', 26);
-      datos = await axios.post(`${this.state.baseURL}/pueblos/comuna`, params);
-      lista = await datos.data;
-      commit('guardarPueblos', lista);
-      commit('cambiarProgresoDatosAPI', 39);
-      datos = await axios.post(`${this.state.baseURL}/grupos/comuna`, params);
-      lista = await datos.data;
-      commit('guardarGrupos', lista);
-      commit('cambiarProgresoDatosAPI', 52);
-      datos = await axios.post(`${this.state.baseURL}/paises/comuna`, params);
-      lista = await datos.data;
-      commit('guardarPaises', lista);
-      commit('cambiarProgresoDatosAPI', 65);
-      datos = await axios.post(`${this.state.baseURL}/escolaridad/comuna`, params);
-      lista = await datos.data;
-      commit('guardarEscolaridad', lista);
-      commit('cambiarProgresoDatosAPI', 80);
-      datos = await axios.post(`${this.state.baseURL}/piramide/comuna`, params);
-      lista = await datos.data;
-      commit('guardarPiramide', lista);
-      commit('cambiarProgresoDatosAPI', 100);
-      commit('cambiarStatusDatosAPI');
-      commit('cambiarProgresoDatosAPI', 0);
+      try{
+        let params = {Comuna: this.state.comuna};
+        let datos = await axios.post(`${this.state.baseURL}/tipologia/comuna`, params);
+        let lista = await datos.data;
+        commit('guardarTipologia', lista);
+        commit('cambiarProgresoDatosAPI', 13);
+        datos = await axios.post(`${this.state.baseURL}/area/comuna`, params);
+        lista = await datos.data;
+        commit('guardarArea', lista);
+        commit('cambiarProgresoDatosAPI', 26);
+        datos = await axios.post(`${this.state.baseURL}/pueblos/comuna`, params);
+        lista = await datos.data;
+        commit('guardarPueblos', lista);
+        commit('cambiarProgresoDatosAPI', 39);
+        datos = await axios.post(`${this.state.baseURL}/grupos/comuna`, params);
+        lista = await datos.data;
+        commit('guardarGrupos', lista);
+        commit('cambiarProgresoDatosAPI', 52);
+        datos = await axios.post(`${this.state.baseURL}/paises/comuna`, params);
+        lista = await datos.data;
+        commit('guardarPaises', lista);
+        commit('cambiarProgresoDatosAPI', 65);
+        datos = await axios.post(`${this.state.baseURL}/escolaridad/comuna`, params);
+        lista = await datos.data;
+        commit('guardarEscolaridad', lista);
+        commit('cambiarProgresoDatosAPI', 80);
+        datos = await axios.post(`${this.state.baseURL}/piramide/comuna`, params);
+        lista = await datos.data;
+        commit('guardarPiramide', lista);
+        commit('cambiarProgresoDatosAPI', 100);
+        commit('cambiarStatusDatosAPI');
+        commit('cambiarProgresoDatosAPI', 0);
+      }
+      catch (e){
+        console.log(e);
+        commit('cambiarColorDatosAPI', 'danger');
+        commit('cambiarProgresoDatosAPI', 100);
+        alert('No es posible obtener los datos de la comuna. Intente nuevamente recargando la página.');
+        commit('cambiarStatusDatosAPI');
+        commit('cambiarColorDatosAPI', 'success');
+        commit('cambiarProgresoDatosAPI', 0);
+      }
+
     },
     datosDistrito: async function({commit}){
       commit('resetearDatos');
       commit('cambiarStatusDatosAPI');
-      let params = {Distrito: this.state.listaDist[this.state.distrito].numero};
-      let datos = await axios.post(`${this.state.baseURL}/tipologia/distrito`, params);
-      let lista = await datos.data;
-      commit('guardarTipologia', lista);
-      commit('cambiarProgresoDatosAPI', 13);
-      datos = await axios.post(`${this.state.baseURL}/area/distrito`, params);
-      lista = await datos.data;
-      commit('guardarArea', lista);
-      commit('cambiarProgresoDatosAPI', 26);
-      datos = await axios.post(`${this.state.baseURL}/pueblos/distrito`, params);
-      lista = await datos.data;
-      commit('guardarPueblos', lista);
-      commit('cambiarProgresoDatosAPI', 39);
-      datos = await axios.post(`${this.state.baseURL}/grupos/distrito`, params);
-      lista = await datos.data;
-      commit('guardarGrupos', lista);
-      commit('cambiarProgresoDatosAPI', 52);
-      datos = await axios.post(`${this.state.baseURL}/paises/distrito`, params);
-      lista = await datos.data;
-      commit('guardarPaises', lista);
-      commit('cambiarProgresoDatosAPI', 65);
-      datos = await axios.post(`${this.state.baseURL}/escolaridad/distrito`, params);
-      lista = await datos.data;
-      commit('guardarEscolaridad', lista);
-      commit('cambiarProgresoDatosAPI', 80);
-      datos = await axios.post(`${this.state.baseURL}/piramide/distrito`, params);
-      lista = await datos.data;
-      commit('guardarPiramide', lista);
-      commit('cambiarProgresoDatosAPI', 100);
-      commit('cambiarStatusDatosAPI');
-      commit('cambiarProgresoDatosAPI', 0);
+      try{
+        let params = {Distrito: this.state.listaDist[this.state.distrito].numero};
+        let datos = await axios.post(`${this.state.baseURL}/tipologia/distrito`, params);
+        let lista = await datos.data;
+        commit('guardarTipologia', lista);
+        commit('cambiarProgresoDatosAPI', 13);
+        datos = await axios.post(`${this.state.baseURL}/area/distrito`, params);
+        lista = await datos.data;
+        commit('guardarArea', lista);
+        commit('cambiarProgresoDatosAPI', 26);
+        datos = await axios.post(`${this.state.baseURL}/pueblos/distrito`, params);
+        lista = await datos.data;
+        commit('guardarPueblos', lista);
+        commit('cambiarProgresoDatosAPI', 39);
+        datos = await axios.post(`${this.state.baseURL}/grupos/distrito`, params);
+        lista = await datos.data;
+        commit('guardarGrupos', lista);
+        commit('cambiarProgresoDatosAPI', 52);
+        datos = await axios.post(`${this.state.baseURL}/paises/distrito`, params);
+        lista = await datos.data;
+        commit('guardarPaises', lista);
+        commit('cambiarProgresoDatosAPI', 65);
+        datos = await axios.post(`${this.state.baseURL}/escolaridad/distrito`, params);
+        lista = await datos.data;
+        commit('guardarEscolaridad', lista);
+        commit('cambiarProgresoDatosAPI', 80);
+        datos = await axios.post(`${this.state.baseURL}/piramide/distrito`, params);
+        lista = await datos.data;
+        commit('guardarPiramide', lista);
+        commit('cambiarProgresoDatosAPI', 100);
+        commit('cambiarStatusDatosAPI');
+        commit('cambiarProgresoDatosAPI', 0);
+      }
+      catch (e){
+        console.log(e);
+        commit('cambiarColorDatosAPI', 'danger');
+        commit('cambiarProgresoDatosAPI', 100);
+        alert('No es posible obtener los datos del distrito. Intente nuevamente recargando la página.');
+        commit('cambiarStatusDatosAPI');
+        commit('cambiarColorDatosAPI', 'success');
+        commit('cambiarProgresoDatosAPI', 0);
+      }
     },
     datosCircunscripcion: async function({commit}){
       commit('resetearDatos');
       commit('cambiarStatusDatosAPI');
-      let params = {Circunscripcion: this.state.listaCirc[this.state.circunscripcion].numero};
-      let datos = await axios.post(`${this.state.baseURL}/tipologia/circunscripcion`, params);
-      let lista = await datos.data;
-      commit('guardarTipologia', lista);
-      commit('cambiarProgresoDatosAPI', 13);
-      datos = await axios.post(`${this.state.baseURL}/area/circunscripcion`, params);
-      lista = await datos.data;
-      commit('guardarArea', lista);
-      commit('cambiarProgresoDatosAPI', 26);
-      datos = await axios.post(`${this.state.baseURL}/pueblos/circunscripcion`, params);
-      lista = await datos.data;
-      commit('guardarPueblos', lista);
-      commit('cambiarProgresoDatosAPI', 39);
-      datos = await axios.post(`${this.state.baseURL}/grupos/circunscripcion`, params);
-      lista = await datos.data;
-      commit('guardarGrupos', lista);
-      commit('cambiarProgresoDatosAPI', 52);
-      datos = await axios.post(`${this.state.baseURL}/paises/circunscripcion`, params);
-      lista = await datos.data;
-      commit('guardarPaises', lista);
-      commit('cambiarProgresoDatosAPI', 65);
-      datos = await axios.post(`${this.state.baseURL}/escolaridad/circunscripcion`, params);
-      lista = await datos.data;
-      commit('guardarEscolaridad', lista);
-      commit('cambiarProgresoDatosAPI', 80);
-      datos = await axios.post(`${this.state.baseURL}/piramide/circunscripcion`, params);
-      lista = await datos.data;
-      commit('guardarPiramide', lista);
-      commit('cambiarProgresoDatosAPI', 100);
-      commit('cambiarStatusDatosAPI');
-      commit('cambiarProgresoDatosAPI', 0);
+      try{
+        let params = {Circunscripcion: this.state.listaCirc[this.state.circunscripcion].numero};
+        let datos = await axios.post(`${this.state.baseURL}/tipologia/circunscripcion`, params);
+        let lista = await datos.data;
+        commit('guardarTipologia', lista);
+        commit('cambiarProgresoDatosAPI', 13);
+        datos = await axios.post(`${this.state.baseURL}/area/circunscripcion`, params);
+        lista = await datos.data;
+        commit('guardarArea', lista);
+        commit('cambiarProgresoDatosAPI', 26);
+        datos = await axios.post(`${this.state.baseURL}/pueblos/circunscripcion`, params);
+        lista = await datos.data;
+        commit('guardarPueblos', lista);
+        commit('cambiarProgresoDatosAPI', 39);
+        datos = await axios.post(`${this.state.baseURL}/grupos/circunscripcion`, params);
+        lista = await datos.data;
+        commit('guardarGrupos', lista);
+        commit('cambiarProgresoDatosAPI', 52);
+        datos = await axios.post(`${this.state.baseURL}/paises/circunscripcion`, params);
+        lista = await datos.data;
+        commit('guardarPaises', lista);
+        commit('cambiarProgresoDatosAPI', 65);
+        datos = await axios.post(`${this.state.baseURL}/escolaridad/circunscripcion`, params);
+        lista = await datos.data;
+        commit('guardarEscolaridad', lista);
+        commit('cambiarProgresoDatosAPI', 80);
+        datos = await axios.post(`${this.state.baseURL}/piramide/circunscripcion`, params);
+        lista = await datos.data;
+        commit('guardarPiramide', lista);
+        commit('cambiarProgresoDatosAPI', 100);
+        commit('cambiarStatusDatosAPI');
+        commit('cambiarProgresoDatosAPI', 0);
+      }
+      catch (e){
+        console.log(e);
+        commit('cambiarColorDatosAPI', 'danger');
+        commit('cambiarProgresoDatosAPI', 100);
+        alert('No es posible obtener los datos de la circunscripción. Intente nuevamente recargando la página.');
+        commit('cambiarStatusDatosAPI');
+        commit('cambiarColorDatosAPI', 'success');
+        commit('cambiarProgresoDatosAPI', 0);
+      }
     },
     datosRegion: async function({commit}){
       commit('resetearDatos');
       commit('cambiarStatusDatosAPI');
-      let params = {Region: this.state.listaReg[this.state.region].nombre}
-      let datos = await axios.post(`${this.state.baseURL}/tipologia/region`, params);
-      let lista = await datos.data;
-      commit('guardarTipologia', lista);
-      commit('cambiarProgresoDatosAPI', 13);
-      datos = await axios.post(`${this.state.baseURL}/area/region`, params);
-      lista = await datos.data;
-      commit('guardarArea', lista);
-      commit('cambiarProgresoDatosAPI', 26);
-      datos = await axios.post(`${this.state.baseURL}/pueblos/region`, params);
-      lista = await datos.data;
-      commit('guardarPueblos', lista);
-      commit('cambiarProgresoDatosAPI', 39);
-      datos = await axios.post(`${this.state.baseURL}/grupos/region`, params);
-      lista = await datos.data;
-      commit('guardarGrupos', lista);
-      commit('cambiarProgresoDatosAPI', 52);
-      datos = await axios.post(`${this.state.baseURL}/paises/region`, params);
-      lista = await datos.data;
-      commit('guardarPaises', lista);
-      commit('cambiarProgresoDatosAPI', 65);
-      datos = await axios.post(`${this.state.baseURL}/escolaridad/region`, params);
-      lista = await datos.data;
-      commit('guardarEscolaridad', lista);
-      commit('cambiarProgresoDatosAPI', 80);
-      datos = await axios.post(`${this.state.baseURL}/piramide/region`, params);
-      lista = await datos.data;
-      commit('guardarPiramide', lista);
-      commit('cambiarProgresoDatosAPI', 100);
-      commit('cambiarStatusDatosAPI');
-      commit('cambiarProgresoDatosAPI', 0);
+      try{
+        let params = {Region: this.state.listaReg[this.state.region].nombre}
+        let datos = await axios.post(`${this.state.baseURL}/tipologia/region`, params);
+        let lista = await datos.data;
+        commit('guardarTipologia', lista);
+        commit('cambiarProgresoDatosAPI', 13);
+        datos = await axios.post(`${this.state.baseURL}/area/region`, params);
+        lista = await datos.data;
+        commit('guardarArea', lista);
+        commit('cambiarProgresoDatosAPI', 26);
+        datos = await axios.post(`${this.state.baseURL}/pueblos/region`, params);
+        lista = await datos.data;
+        commit('guardarPueblos', lista);
+        commit('cambiarProgresoDatosAPI', 39);
+        datos = await axios.post(`${this.state.baseURL}/grupos/region`, params);
+        lista = await datos.data;
+        commit('guardarGrupos', lista);
+        commit('cambiarProgresoDatosAPI', 52);
+        datos = await axios.post(`${this.state.baseURL}/paises/region`, params);
+        lista = await datos.data;
+        commit('guardarPaises', lista);
+        commit('cambiarProgresoDatosAPI', 65);
+        datos = await axios.post(`${this.state.baseURL}/escolaridad/region`, params);
+        lista = await datos.data;
+        commit('guardarEscolaridad', lista);
+        commit('cambiarProgresoDatosAPI', 80);
+        datos = await axios.post(`${this.state.baseURL}/piramide/region`, params);
+        lista = await datos.data;
+        commit('guardarPiramide', lista);
+        commit('cambiarProgresoDatosAPI', 100);
+        commit('cambiarStatusDatosAPI');
+        commit('cambiarProgresoDatosAPI', 0);
+      }
+      catch (e){
+        console.log(e);
+        commit('cambiarColorDatosAPI', 'danger');
+        commit('cambiarProgresoDatosAPI', 100);
+        alert('No es posible obtener los datos de la región. Intente nuevamente recargando la página.');
+        commit('cambiarStatusDatosAPI');
+        commit('cambiarColorDatosAPI', 'success');
+        commit('cambiarProgresoDatosAPI', 0);
+      }
     },
     datosProvincia: async function({commit}){
       commit('resetearDatos');
       commit('cambiarStatusDatosAPI');
-      let params = {Provincia: this.state.listaProv[this.state.provincia].nombre};
-      let datos = await axios.post(`${this.state.baseURL}/tipologia/provincia`, params);
-      let lista = await datos.data;
-      commit('guardarTipologia', lista);
-      commit('cambiarProgresoDatosAPI', 13);
-      datos = await axios.post(`${this.state.baseURL}/area/provincia`, params);
-      lista = await datos.data;
-      commit('guardarArea', lista);
-      commit('cambiarProgresoDatosAPI', 26);
-      datos = await axios.post(`${this.state.baseURL}/pueblos/provincia`, params);
-      lista = await datos.data;
-      commit('guardarPueblos', lista);
-      commit('cambiarProgresoDatosAPI', 39);
-      datos = await axios.post(`${this.state.baseURL}/grupos/provincia`, params);
-      lista = await datos.data;
-      commit('guardarGrupos', lista);
-      commit('cambiarProgresoDatosAPI', 52);
-      datos = await axios.post(`${this.state.baseURL}/paises/provincia`, params);
-      lista = await datos.data;
-      commit('guardarPaises', lista);
-      commit('cambiarProgresoDatosAPI', 65);
-      datos = await axios.post(`${this.state.baseURL}/escolaridad/provincia`, params);
-      lista = await datos.data;
-      commit('guardarEscolaridad', lista);
-      commit('cambiarProgresoDatosAPI', 80);
-      datos = await axios.post(`${this.state.baseURL}/piramide/provincia`, params);
-      lista = await datos.data;
-      commit('guardarPiramide', lista);
-      commit('cambiarProgresoDatosAPI', 100);
-      commit('cambiarStatusDatosAPI');
-      commit('cambiarProgresoDatosAPI', 0);
+      try{
+        let params = {Provincia: this.state.listaProv[this.state.provincia].nombre};
+        let datos = await axios.post(`${this.state.baseURL}/tipologia/provincia`, params);
+        let lista = await datos.data;
+        commit('guardarTipologia', lista);
+        commit('cambiarProgresoDatosAPI', 13);
+        datos = await axios.post(`${this.state.baseURL}/area/provincia`, params);
+        lista = await datos.data;
+        commit('guardarArea', lista);
+        commit('cambiarProgresoDatosAPI', 26);
+        datos = await axios.post(`${this.state.baseURL}/pueblos/provincia`, params);
+        lista = await datos.data;
+        commit('guardarPueblos', lista);
+        commit('cambiarProgresoDatosAPI', 39);
+        datos = await axios.post(`${this.state.baseURL}/grupos/provincia`, params);
+        lista = await datos.data;
+        commit('guardarGrupos', lista);
+        commit('cambiarProgresoDatosAPI', 52);
+        datos = await axios.post(`${this.state.baseURL}/paises/provincia`, params);
+        lista = await datos.data;
+        commit('guardarPaises', lista);
+        commit('cambiarProgresoDatosAPI', 65);
+        datos = await axios.post(`${this.state.baseURL}/escolaridad/provincia`, params);
+        lista = await datos.data;
+        commit('guardarEscolaridad', lista);
+        commit('cambiarProgresoDatosAPI', 80);
+        datos = await axios.post(`${this.state.baseURL}/piramide/provincia`, params);
+        lista = await datos.data;
+        commit('guardarPiramide', lista);
+        commit('cambiarProgresoDatosAPI', 100);
+        commit('cambiarStatusDatosAPI');
+        commit('cambiarProgresoDatosAPI', 0);
+      }
+      catch (e){
+        console.log(e);
+        commit('cambiarColorDatosAPI', 'danger');
+        commit('cambiarProgresoDatosAPI', 100);
+        alert('No es posible obtener los datos de la provincia. Intente nuevamente recargando la página.');
+        commit('cambiarStatusDatosAPI');
+        commit('cambiarColorDatosAPI', 'success');
+        commit('cambiarProgresoDatosAPI', 0);
+      }
     },
     datosLocalidad: async function({commit}){
       commit('resetearDatos');
       commit('cambiarStatusDatosAPI');
-      let params = {Comuna: this.state.comuna, Localidad: this.state.localidad};
-      let datos = await axios.post(`${this.state.baseURL}/tipologia/localidad`, params);
-      let lista = await datos.data;
-      commit('guardarTipologia', lista);
-      commit('cambiarProgresoDatosAPI', 13);
-      datos = await axios.post(`${this.state.baseURL}/area/localidad`, params);
-      lista = await datos.data;
-      commit('guardarArea', lista);
-      commit('cambiarProgresoDatosAPI', 26);
-      datos = await axios.post(`${this.state.baseURL}/pueblos/localidad`, params);
-      lista = await datos.data;
-      commit('guardarPueblos', lista);
-      commit('cambiarProgresoDatosAPI', 39);
-      datos = await axios.post(`${this.state.baseURL}/grupos/localidad`, params);
-      lista = await datos.data;
-      commit('guardarGrupos', lista);
-      commit('cambiarProgresoDatosAPI', 52);
-      datos = await axios.post(`${this.state.baseURL}/paises/localidad`, params);
-      lista = await datos.data;
-      commit('guardarPaises', lista);
-      commit('cambiarProgresoDatosAPI', 65);
-      datos = await axios.post(`${this.state.baseURL}/escolaridad/localidad`, params);
-      lista = await datos.data;
-      commit('guardarEscolaridad', lista);
-      commit('cambiarProgresoDatosAPI', 80);
-      datos = await axios.post(`${this.state.baseURL}/piramide/localidad`, params);
-      lista = await datos.data;
-      commit('guardarPiramide', lista);
-      commit('cambiarProgresoDatosAPI', 100);
-      commit('cambiarStatusDatosAPI');
-      commit('cambiarProgresoDatosAPI', 0);
+      try{
+        let params = {Comuna: this.state.comuna, Localidad: this.state.localidad};
+        let datos = await axios.post(`${this.state.baseURL}/tipologia/localidad`, params);
+        let lista = await datos.data;
+        commit('guardarTipologia', lista);
+        commit('cambiarProgresoDatosAPI', 13);
+        datos = await axios.post(`${this.state.baseURL}/area/localidad`, params);
+        lista = await datos.data;
+        commit('guardarArea', lista);
+        commit('cambiarProgresoDatosAPI', 26);
+        datos = await axios.post(`${this.state.baseURL}/pueblos/localidad`, params);
+        lista = await datos.data;
+        commit('guardarPueblos', lista);
+        commit('cambiarProgresoDatosAPI', 39);
+        datos = await axios.post(`${this.state.baseURL}/grupos/localidad`, params);
+        lista = await datos.data;
+        commit('guardarGrupos', lista);
+        commit('cambiarProgresoDatosAPI', 52);
+        datos = await axios.post(`${this.state.baseURL}/paises/localidad`, params);
+        lista = await datos.data;
+        commit('guardarPaises', lista);
+        commit('cambiarProgresoDatosAPI', 65);
+        datos = await axios.post(`${this.state.baseURL}/escolaridad/localidad`, params);
+        lista = await datos.data;
+        commit('guardarEscolaridad', lista);
+        commit('cambiarProgresoDatosAPI', 80);
+        datos = await axios.post(`${this.state.baseURL}/piramide/localidad`, params);
+        lista = await datos.data;
+        commit('guardarPiramide', lista);
+        commit('cambiarProgresoDatosAPI', 100);
+        commit('cambiarStatusDatosAPI');
+        commit('cambiarProgresoDatosAPI', 0);
+      }
+      catch (e){
+        console.log(e);
+        commit('cambiarColorDatosAPI', 'danger');
+        commit('cambiarProgresoDatosAPI', 100);
+        alert('No es posible obtener los datos de la localidad. Intente nuevamente recargando la página.');
+        commit('cambiarStatusDatosAPI');
+        commit('cambiarColorDatosAPI', 'success');
+        commit('cambiarProgresoDatosAPI', 0);
+      }
     }
   },
   modules: {
