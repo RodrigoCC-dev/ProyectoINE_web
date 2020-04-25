@@ -4,7 +4,9 @@
       <Bnavbar></Bnavbar>
     </div>
     <div class="alcalde">
-      <h1>Usuario perfil Alcalde</h1>
+      <div class="my-3">
+        <h1>Usuario perfil Alcalde</h1>
+      </div>
       <div class="mx-5 mt-5">
         <form>
           <b-row>

@@ -4,7 +4,9 @@
       <Bnavbar></Bnavbar>
     </div>
     <div class="usuario">
-      <h1>Perfil Usuario Común</h1>
+      <div class="my-3">
+        <h1>Perfil Usuario Común</h1>
+      </div>
       <div class="mx-5 mt-5">
         <form>
           <b-row>
