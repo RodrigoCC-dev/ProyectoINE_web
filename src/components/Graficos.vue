@@ -47,8 +47,6 @@
   import EscolaridadChart from '@/components/EscolaridadChart.vue'
   import PiramideChart from '@/components/PiramideChart.vue'
 
-  import {mapState} from 'vuex'
-
   export default{
     name: 'Graficos',
     components: {
@@ -60,8 +58,5 @@
       EscolaridadChart,
       PiramideChart
     },
-    computed:{
-      ...mapState(['tipologia', 'area', 'pueblos', 'grupos', 'paises', 'escolaridad', 'piramide'])
-    }
   }
 </script>

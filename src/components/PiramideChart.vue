@@ -61,8 +61,13 @@
         return this.datosTabla;
       }
     },
+    methods: {
+      refrescarDatos(){
+        this.transformarDatos;
+      }
+    },
     updated(){
-      this.transformarDatos();
+      this.refrescarDatos();
     }
   }
 </script>
