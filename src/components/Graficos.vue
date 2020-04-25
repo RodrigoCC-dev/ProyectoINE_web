@@ -21,25 +21,19 @@
       </b-col>
     </b-row>
     <b-row>
-      <b-col md="8" class="my-2">
-        <strong class="text-info">Distribución de la población según País de Procedencia</strong>
+      <b-col md="12">
         <PaisChart></PaisChart>
       </b-col>
-      <b-col></b-col>
     </b-row>
     <b-row>
-      <b-col md="8" class="my-2">
-        <strong class="text-info">Distribución de población según años de Escolaridad</strong>
+      <b-col>
         <EscolaridadChart></EscolaridadChart>
       </b-col>
-      <b-col></b-col>
     </b-row>
     <b-row>
-      <b-col md="8" class="my-2">
-        <strong class="text-info">Pirámide poblacional</strong>
+      <b-col>
         <PiramideChart></PiramideChart>
       </b-col>
-      <b-col></b-col>
     </b-row>
   </div>
 </template>

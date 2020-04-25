@@ -1,25 +1,14 @@
 <template>
   <div class="mt-3">
     <b-card-group deck>
-      <b-card bg-variant="light" header="Distribución de la población según Área urbana y rural" class="text-left">
+      <b-card bg-variant="light" :header="titulo" class="text-left">
         <b-card-text>
           <pie-chart :data="area" legend="right" round="2" suffix="%"></pie-chart>
         </b-card-text>
       </b-card>
-      <b-card bg-variant="light" header="Distribución de la población según Área urbana y rural" class="text-left">
+      <b-card bg-variant="light" :header="titulo" class="text-left">
         <b-card-text>
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th scope="col">Tipo de Área</th>
-                <th scope="col">Distribución porcentual</th>
-              </tr>
-            </thead>
-            <tbody v-for="(value, key) of area">
-              <th scope="row">{{key}}</th>
-              <td>{{Math.round(value*100)/100}}%</td>
-            </tbody>
-          </table>
+          <Tabla2C encabezado="Tipo de Área" :datos="area"></Tabla2C>
         </b-card-text>
       </b-card>
     </b-card-group>
@@ -27,10 +16,20 @@
 </template>
 
 <script>
+  import Tabla2C from '@/components/Tabla2C.vue'
+
   import {mapState} from 'vuex'
 
   export default{
     name: 'AreaChart',
+    components: {
+      Tabla2C
+    },
+    data(){
+      return{
+        titulo: 'Distribución de la población según Área urbana y rural'
+      }
+    },
     computed: {
       ...mapState(['area'])
     }
