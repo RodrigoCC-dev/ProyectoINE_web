@@ -92,14 +92,19 @@
       disteClick(){
         if(this.localidad !== null){
           this.datosLocalidad();
+          this.$store.commit('desplegarGraficos', true);
         }else if(this.comuna !== null){
           this.datosComuna();
+          this.$store.commit('desplegarGraficos', true);
         }else if(this.provincia !== null){
           this.datosProvincia();
-        }else{
+          this.$store.commit('desplegarGraficos', true);
+        }else if(this.region !== null){
           this.datosRegion();
+          this.$store.commit('desplegarGraficos', true);
+        }else{
+          alert('Debe seleccionar las opciones de Región, Provincia, Comuna y/o Localidad a mostrar');
         }
-        this.$store.commit('desplegarGraficos', true);
       }
     },
     mounted(){

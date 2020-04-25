@@ -60,7 +60,7 @@
       return{}
     },
     computed:{
-      ...mapState(['listaDist', 'comuna', 'tipologia', 'area', 'pueblos', 'grupos', 'paises', 'escolaridad', 'piramide', 'mostrarGraficos']),
+      ...mapState(['listaDist', 'comuna', 'distrito', 'mostrarGraficos']),
 
       actualizarDistrito: {
         get: function(){
@@ -79,10 +79,14 @@
       disteClick(){
         if(this.comuna !== null){
           this.datosComuna();
-        }else{
+          this.$store.commit('desplegarGraficos', true);
+        }else if(this.distrito !== null){
           this.datosDistrito();
+          this.$store.commit('desplegarGraficos', true);
+        }else{
+          alert('Debe seleccionar un Distrito Electoral a mostrar');
         }
-        this.$store.commit('desplegarGraficos', true);
+
       },
       listarComunas: function(){
         return this.$store.commit('getComunasDistrito', this.actualizarDistrito);

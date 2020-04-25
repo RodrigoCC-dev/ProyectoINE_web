@@ -61,7 +61,7 @@
       }
     },
     computed: {
-      ...mapState(['listaCirc', 'comuna', 'mostrarGraficos']),
+      ...mapState(['listaCirc', 'comuna', 'circunscripcion', 'mostrarGraficos']),
 
       actualizarCircunscripcion: {
         get: function () {
@@ -80,10 +80,14 @@
       disteClick(){
         if(this.comuna !== null){
           this.datosComuna();
-        }else{
+          this.$store.commit('desplegarGraficos', true);
+        }else if(this.circunscripcion !== null){
           this.datosCircunscripcion();
+          this.$store.commit('desplegarGraficos', true);
+        }else{
+          alert('Debe seleccionar una Circunscripción Senatorial a mostrar');
         }
-        this.$store.commit('desplegarGraficos', true);
+
       },
       listarComunas: function(){
         return this.$store.commit('getComunasCircunscripcion', this.actualizarCircunscripcion);

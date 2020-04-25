@@ -73,12 +73,17 @@
       disteClick(){
         if(this.comuna !== null){
           this.datosComuna();
+          this.$store.commit('desplegarGraficos', true);
         }else if(this.provincia !== null){
           this.datosProvincia();
-        }else{
+          this.$store.commit('desplegarGraficos', true);
+        }else if(this.region !== null){
           this.datosRegion();
+          this.$store.commit('desplegarGraficos', true);
+        }else{
+          alert('Debe seleccionar una región para mostrar');
         }
-        this.$store.commit('desplegarGraficos', true);
+
       }
     },
     mounted(){
