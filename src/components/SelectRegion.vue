@@ -29,7 +29,7 @@
             this.$store.commit('seleccionRegion', value);
             return this.listarProvincias();
           }else{
-            return this.$store.commit('selecciionRegion', value);
+            return this.$store.commit('seleccionRegion', value);
           }
         }
       }
