@@ -46,16 +46,18 @@
 
       transformarDatos: function (){
         let datos = [];
-        let keys = Object.keys(this.piramide[0].data);
-        let hombres = Object.values(this.piramide[0].data);
-        let mujeres = Object.values(this.piramide[1].data);
-        let aux = [];
-        for(let i = 0; i < keys.length; i++){
-          aux.push(keys[i]);
-          aux.push(hombres[i]);
-          aux.push(mujeres[i]);
-          datos.push(aux);
-          aux = [];
+        if(this.piramide !== null){
+          let keys = Object.keys(this.piramide[0].data);
+          let hombres = Object.values(this.piramide[0].data);
+          let mujeres = Object.values(this.piramide[1].data);
+          let aux = [];
+          for(let i = 0; i < keys.length; i++){
+            aux.push(keys[i]);
+            aux.push(hombres[i]);
+            aux.push(mujeres[i]);
+            datos.push(aux);
+            aux = [];
+          }
         }
         this.datosTabla = datos;
         return this.datosTabla;
