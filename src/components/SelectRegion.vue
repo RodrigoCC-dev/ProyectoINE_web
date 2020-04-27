@@ -15,9 +15,6 @@
 
   export default{
     name: 'SelectRegion',
-    data(){
-      return{}
-    },
     computed: {
       ...mapState(['listaReg']),
 
@@ -26,10 +23,14 @@
           return this.$store.state.region;
         },
         set: function (value){
-          this.$store.commit('seleccionComuna', null)
-          this.$store.commit('seleccionProvincia', null)
-          this.$store.commit('seleccionRegion', value);
-          return this.listarProvincias();
+          if(value !== null){
+            this.$store.commit('seleccionComuna', null);
+            this.$store.commit('seleccionProvincia', null);
+            this.$store.commit('seleccionRegion', value);
+            return this.listarProvincias();
+          }else{
+            return this.$store.commit('selecciionRegion', value);
+          }
         }
       }
     },
