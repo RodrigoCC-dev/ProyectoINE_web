@@ -13,7 +13,7 @@
             <b-col md="6" class="my-3">
               <b-form-select v-model="actualizarCircunscripcion">
                 <b-form-select-option :value="null">Seleccione Circunscripción</b-form-select-option>
-                <b-form-select-option v-for="(item, index) of listaCirc" :key="item.id" :value="index">Circunscripción #: {{item.numero}}</b-form-select-option>
+                <b-form-select-option v-for="(item, index) of listaCirc" :key="item.id" :value="index">Circunscripción #{{item.numero}}</b-form-select-option>
               </b-form-select>
             </b-col>
             <b-col md="6" class="my-3">
@@ -65,9 +65,13 @@
           return this.$store.state.circunscripcion
         },
         set: function (idCircuns) {
-          this.$store.commit('seleccionComuna', null);
-          this.$store.commit('seleccionCircunscripcion', idCircuns);
-          return this.listarComunas();
+          if(idCircuns !== null){
+            this.$store.commit('seleccionComuna', null);
+            this.$store.commit('seleccionCircunscripcion', idCircuns);
+            return this.listarComunas();
+          }else{
+            return this.$store.commit('seleccionComuna', null);
+          }
         }
       }
     },
