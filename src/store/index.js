@@ -14,7 +14,7 @@ export default new Vuex.Store({
       {nombre: "Usuario Común", direccion: "/usuario"}
     ],
 
-    baseURL: 'http://34.67.50.148:8080',
+    baseURL: 'http://34.67.50.148:8080/Proyecto-INE',
 
     //Selectores de información
     listaReg: [],
