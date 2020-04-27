@@ -60,16 +60,12 @@
       Loading,
       Graficos
     },
-    data(){
-      return{
-      }
-    },
     computed:{
-      ...mapState(['region', 'provincia', 'comuna','mostrarGraficos'])
+      ...mapState(['comuna','mostrarGraficos'])
 
     },
     methods:{
-      ...mapActions(['datosRegion', 'datosProvincia', 'datosComuna']),
+      ...mapActions(['datosComuna']),
 
       disteClick(){
         if(this.comuna !== null){
@@ -78,7 +74,6 @@
         }else{
           alert('Debe seleccionar una comuna para mostrar');
         }
-
       }
     },
     mounted(){

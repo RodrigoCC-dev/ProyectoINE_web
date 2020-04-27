@@ -57,11 +57,6 @@
       Loading,
       Graficos
     },
-    data(){
-      return {
-
-      }
-    },
     computed: {
       ...mapState(['listaCirc', 'comuna', 'circunscripcion', 'mostrarGraficos']),
 

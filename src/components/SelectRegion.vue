@@ -2,7 +2,7 @@
 
   <div>
     <b-form-select v-model="actualizarRegion">
-      <b-form-select-option :value='null'>Seleccione una Region</b-form-select-option>
+      <b-form-select-option :value='null'>Seleccione una Región</b-form-select-option>
       <b-form-select-option v-for="(item, index) of listaReg" :key="item.id" :value="index">{{item.numero}} - {{item.nombre}}</b-form-select-option>
     </b-form-select>
     <h1></h1>

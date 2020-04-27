@@ -58,9 +58,6 @@
       Loading,
       Graficos
     },
-    data(){
-      return{}
-    },
     computed:{
       ...mapState(['listaDist', 'comuna', 'distrito', 'mostrarGraficos']),
 

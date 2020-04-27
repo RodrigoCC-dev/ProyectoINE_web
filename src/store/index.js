@@ -55,7 +55,7 @@ export default new Vuex.Store({
   },
   mutations: {
 
-    // Métodos para actualizar listados
+    // Mutaciones para actualizar listados
     listarRegiones(state, lista){
       state.listaReg = lista
     },
@@ -87,7 +87,7 @@ export default new Vuex.Store({
       state.listaLoc = state.listaCom[index].localidades
     },
 
-    // Métodos para guardar elecciones de valores
+    // Mutaciones para guardar elecciones de valores
     seleccionDistrito(state, id){
       state.distrito = id
     },
@@ -107,7 +107,7 @@ export default new Vuex.Store({
       state.localidad = nombre
     },
 
-    // Métodos para guardar datos desde la API
+    // Mutaciones para guardar datos desde la API
     guardarTipologia(state, lista){
       let datos = {};
       datos['Unipersonal'] = lista.unipersonal
@@ -256,6 +256,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    //Acciones para obtener los listados de opciones
     getRegiones: async function({commit}){
       commit('cambiarStatusListados');
       try{
@@ -322,6 +323,8 @@ export default new Vuex.Store({
         commit('cambiarColorListados', 'warning');
       }
     },
+
+    //Acciones para obtener los datos del Censo 2017
     datosComuna: async function({commit}){
       commit('resetearDatos');
       commit('cambiarStatusDatosAPI');
@@ -367,7 +370,6 @@ export default new Vuex.Store({
         commit('cambiarColorDatosAPI', 'success');
         commit('cambiarProgresoDatosAPI', 0);
       }
-
     },
     datosDistrito: async function({commit}){
       commit('resetearDatos');

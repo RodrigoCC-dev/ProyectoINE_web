@@ -26,13 +26,13 @@
     components: {
       Tabla2C
     },
-    computed: {
-      ...mapState(['paises'])
-    },
     data(){
       return{
         titulo: 'Distribución de la población según País de Procedencia'
       }
+    },
+    computed: {
+      ...mapState(['paises'])
     }
   }
 </script>

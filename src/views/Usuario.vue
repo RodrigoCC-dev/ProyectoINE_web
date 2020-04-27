@@ -23,7 +23,7 @@
             </b-col>
             <b-col md="6" class="my-3">
               <b-form-select v-model="actualizarLocalidad">
-                <b-form-select-option :value="null">Seleccionar Localidad</b-form-select-option>
+                <b-form-select-option :value="null">Seleccione una Localidad</b-form-select-option>
                 <b-form-select-option v-for="(item, index) of listaLoc" :key="item.id" :value="item">{{item}}</b-form-select-option>
               </b-form-select>
             </b-col>
@@ -70,11 +70,6 @@
       StatusAPI,
       Loading,
       Graficos
-    },
-    data(){
-      return{
-
-      }
     },
     computed: {
       ...mapState(['listaLoc', 'region', 'provincia', 'comuna', 'localidad', 'mostrarGraficos']),

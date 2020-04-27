@@ -61,11 +61,6 @@
       Loading,
       Graficos
     },
-    data(){
-      return{
-
-      }
-    },
     computed: {
       ...mapState(['region', 'provincia', 'comuna', 'mostrarGraficos'])
     },
